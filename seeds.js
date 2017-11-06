@@ -2,7 +2,7 @@ const
   mongoose = require('mongoose'),
   MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/pressto',
   User = require('./models/User.js'),
-  MenuItem = require('./models/MenuItem.js'),
+  Product = require('./models/Product.js'),
   Order = require('./models/Order.js')
 
 mongoose.connect(MONGODB_URI, (err) => {
@@ -16,7 +16,7 @@ var user1 = {
   password: "password"
 }
 
-var menuItem1 = {
+var product1 = {
 	name: "Caramel Macchiato",
 	price: "5.99",
 	description: "One shot of espresso with caramel syrup",
@@ -24,7 +24,7 @@ var menuItem1 = {
 	category: "Hot"
 }
 
-var menuItem2 = {
+var product2 = {
   name: "Matcha Latte",
   price: "5.99",
   description: "Ice matcha green tea with milk",
@@ -32,7 +32,7 @@ var menuItem2 = {
   category: "Iced"
 }
 
-var menuItem2 = {
+var product3 = {
   name: "Blueberry Muffin",
   price: "5.99",
   description: "Natural grains with fresh blueberries",
@@ -42,8 +42,8 @@ var menuItem2 = {
 
 ///////// User /////////
 User.findOne({firstName: user1.firstName}, (err, user) => {
-  if(user){
-    User.create(menuItem1, (err, user) => {
+  if(!user){
+    User.create(user1, (err, user) => {
       if(err) return console.log(err)
       console.log("user 1 created")
     })
@@ -51,29 +51,29 @@ User.findOne({firstName: user1.firstName}, (err, user) => {
 })
 
 ///////// Menu Items /////////
-MenuItem.findOne({name: menuItem1.name}, (err, menuItem) => {
-  if(menuItem){
-    MenuItem.create(menuItem1, (err, menuItem) => {
+Product.findOne({name: product1.name}, (err, product) => {
+  if(!product){
+    Product.create(product1, (err, product) => {
       if(err) return console.log(err)
-      console.log("menu item 1 created")
+      console.log("product 1 created")
     })
   }
 })
 
-MenuItem.findOne({ name: menuItem2.name }, (err, menuItem) => {
-  if (menuItem) {
-    MenuItem.create(menuItem2, (err, menuItem) => {
+Product.findOne({ name: product2.name }, (err, product) => {
+  if(!product) {
+    Product.create(product2, (err, product) => {
       if (err) return console.log(err)
-      console.log("menu item 2 created")
+      console.log("product 2 created")
     })
   }
 })
 
-MenuItem.findOne({ name: menuItem3.name }, (err, menuItem) => {
-  if(menuItem) {
-    MenuItem.create(menuItem3, (err, menuItem) => {
+Product.findOne({ name: product3.name }, (err, product) => {
+  if(!product) {
+    Product.create(product3, (err, product) => {
       if (err) return console.log(err)
-      console.log("menu item 3 created")
+      console.log("product 3 created")
     })
   }
 })

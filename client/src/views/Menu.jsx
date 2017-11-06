@@ -3,16 +3,16 @@ import axios from 'axios'
 
 class Menu extends React.Component {
   state = {
-    menuItems: null
+    products: null
   }
 
   componentDidMount() {
-    axios({method: 'get', url: '/api/menu-items'})
+    axios({method: 'get', url: '/api/products'})
       .then(res => {
-        var menuItems = res.data.menuItems
+        var menuItems = res.data.products
         console.log(menuItems)
         this.setState({
-          menuItems: res.data.menuItems
+          products: res.data.products
         })
       })
   }
@@ -21,18 +21,18 @@ class Menu extends React.Component {
     return (
       <div className="Menu">
         <h1>Menu</h1>
-        { !this.state.menuItems
+        { !this.state.products
         ? (
             <div>Loading...</div>
           ) 
         : (
             <div className="menuItems">
-              {this.state.menuItems.map(menuItem => {
+              {this.state.products.map(product => {
                 return (
-                  <div key={menuItem._id} style={{marginBottom: '30px'}}>
-                    <img src={menuItem.image} width="300" /> <br/>
-                    <b>{menuItem.name}</b> <br/>
-                    {menuItem.description} <br/>
+                  <div key={product._id} style={{marginBottom: '30px'}}>
+                    <img src={product.image} width="300" /> <br/>
+                    <b>{product.name}</b> <br/>
+                    {product.description} <br/>
                     <span>Quantity: <input type="number" defaultValue="1"/></span> <br/>
                     <button>Add to Cart</button>
                   </div>

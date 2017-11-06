@@ -1,39 +1,39 @@
 const
-  MenuItem = require('../models/MenuItem.js')
+  Product = require('../models/Product.js')
 
 module.exports = {
   index: (req, res) => {
-    MenuItem.find({}, (err, menuItems) => {
+    Product.find({}, (err, products) => {
       if(err) return res.json({ success: false, message: "Something went wrong. Please try again." })
-      res.json({ success: true, menuItems })
+      res.json({ success: true, products })
     })
   },
 
   show: (req, res) => {
-    MenuItem.find(req.params.id, (err, menuItem) => {
+    Product.find(req.params.id, (err, product) => {
       if(err) return res.json({ success: false, message: "Something went wrong. Please try again." })
-      res.json({ success: true, menuItem })
+      res.json({ success: true, product })
     })
   },
 
   create: (req, res) => {
-    MenuItem.create(req.body, (err, menuItem) => {
+    Product.create(req.body, (err, product) => {
       if(err) return res.json({ success: false, message: "Something went wrong. Please try again." })
-      res.json({ success: true, message: "Successfully created menu item", menuItem })
+      res.json({ success: true, message: "Successfully created menu item", product })
     })
   },
 
   update: (req, res) => {
-    MenuItem.findByIdAndUpdate(req.params.id, req.body, { new: true}, (err, menuItem) => {
+    Product.findByIdAndUpdate(req.params.id, req.body, { new: true}, (err, product) => {
       if(err) return res.json({ success: false, message: "Something went wrong. Please try again." })
-      res.json({ success: true, message: "Successfully updated menu item", menuItem })
+      res.json({ success: true, message: "Successfully updated menu item", product })
     })
   },
 
   destroy: (req, res) => {
-    MenuItem.findByIdAndRemove(req.params.id, (err, menuItem) => {
+    Product.findByIdAndRemove(req.params.id, (err, product) => {
       if (err) return res.json({ success: false, message: "Something went wrong. Please try again." })
-      res.json({ success: true, message: "Successfully destroyed menu item", menuItem })
+      res.json({ success: true, message: "Successfully destroyed menu item", product })
     })
   }
 }
