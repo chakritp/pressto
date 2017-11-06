@@ -7,7 +7,7 @@ const
       telephoneNumber: { type: String, required: true }
     },
     menuItems: [
-      { quantity: { type: Number, default: 0 } },
+      { quantity: { type: Number, default: 1 } },
       { menuItem: { type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' } }
     ],
     status: String //pending, inProgress, ready, done

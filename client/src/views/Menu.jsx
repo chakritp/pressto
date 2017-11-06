@@ -29,7 +29,9 @@ class Menu extends React.Component {
               {this.state.menuItems.map(menuItem => {
                 return (
                   <div key={menuItem._id}>
-                    {menuItem.name} <button>Add to Cart</button>
+                    <b>{menuItem.name}</b> <br/>
+                    <span>Quantity: </span>
+                    <button>Add to Cart</button>
                   </div>
                 )
               })}
