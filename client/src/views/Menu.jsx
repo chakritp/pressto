@@ -20,6 +20,7 @@ class Menu extends React.Component {
   render() {
     return (
       <div className="Menu">
+        <h1>Menu</h1>
         { !this.state.menuItems
         ? (
             <div>Loading...</div>
@@ -28,9 +29,11 @@ class Menu extends React.Component {
             <div className="menuItems">
               {this.state.menuItems.map(menuItem => {
                 return (
-                  <div key={menuItem._id}>
+                  <div key={menuItem._id} style={{marginBottom: '30px'}}>
+                    <img src={menuItem.image} width="300" /> <br/>
                     <b>{menuItem.name}</b> <br/>
-                    <span>Quantity: </span>
+                    {menuItem.description} <br/>
+                    <span>Quantity: <input type="number" defaultValue="1"/></span> <br/>
                     <button>Add to Cart</button>
                   </div>
                 )

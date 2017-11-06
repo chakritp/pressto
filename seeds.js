@@ -9,6 +9,13 @@ mongoose.connect(MONGODB_URI, (err) => {
   console.log(err || `Connected to DB at ${MONGODB_URI}`)
 })
 
+var user1 = {
+  firstName: "Chakrit",
+  lastName: "Prasatwattana",
+  email: "chakrit@test.com",
+  password: "password"
+}
+
 var menuItem1 = {
 	name: "Caramel Macchiato",
 	price: "5.99",
@@ -25,12 +32,54 @@ var menuItem2 = {
   category: "Iced"
 }
 
-MenuItem.create(menuItem1, (err, menuItem) => {
-  if(err) return console.log(err)
-  console.log("menu item 1 created")
+var menuItem2 = {
+  name: "Blueberry Muffin",
+  price: "5.99",
+  description: "Natural grains with fresh blueberries",
+  image: "https://sparkpeo.hs.llnwd.net/e2/guid/100-Calorie-Blueberry-Muffins/83454cbe-efb5-4c7e-9d23-57e74ac089c9.jpg",
+  category: "Food"
+}
+
+///////// User /////////
+User.findOne({firstName: user1.firstName}, (err, user) => {
+  if(user){
+    User.create(menuItem1, (err, user) => {
+      if(err) return console.log(err)
+      console.log("user 1 created")
+    })
+  }
 })
 
-MenuItem.create(menuItem2, (err, menuItem) => {
-  if(err) return console.log(err)
-  console.log("menu item 2 created")
+///////// Menu Items /////////
+MenuItem.findOne({name: menuItem1.name}, (err, menuItem) => {
+  if(menuItem){
+    MenuItem.create(menuItem1, (err, menuItem) => {
+      if(err) return console.log(err)
+      console.log("menu item 1 created")
+    })
+  }
 })
+
+MenuItem.findOne({ name: menuItem2.name }, (err, menuItem) => {
+  if (menuItem) {
+    MenuItem.create(menuItem2, (err, menuItem) => {
+      if (err) return console.log(err)
+      console.log("menu item 2 created")
+    })
+  }
+})
+
+MenuItem.findOne({ name: menuItem3.name }, (err, menuItem) => {
+  if(menuItem) {
+    MenuItem.create(menuItem3, (err, menuItem) => {
+      if (err) return console.log(err)
+      console.log("menu item 3 created")
+    })
+  }
+})
+
+
+
+
+
+///////// Order /////////
