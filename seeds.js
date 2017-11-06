@@ -13,6 +13,14 @@ var user1 = {
   firstName: "Chakrit",
   lastName: "Prasatwattana",
   email: "chakrit@test.com",
+  password: "password",
+  admin: true
+}
+
+var user2 = {
+  firstName: "John",
+  lastName: "Doe",
+  email: "john@test.com",
   password: "password"
 }
 
@@ -46,6 +54,15 @@ User.findOne({firstName: user1.firstName}, (err, user) => {
     User.create(user1, (err, user) => {
       if(err) return console.log(err)
       console.log("user 1 created")
+    })
+  }
+})
+
+User.findOne({ firstName: user2.firstName }, (err, user) => {
+  if (!user) {
+    User.create(user2, (err, user) => {
+      if (err) return console.log(err)
+      console.log("user 2 created")
     })
   }
 })

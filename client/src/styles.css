@@ -1,4 +1,10 @@
 .App {
   text-align: center; }
 
+.NavBar ul, .NavBar li {
+  list-style: none; }
+.NavBar li {
+  display: inline;
+  margin: 5px; }
+
 /*# sourceMappingURL=styles.css.map */
