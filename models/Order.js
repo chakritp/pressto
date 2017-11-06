@@ -6,7 +6,10 @@ const
       name: { type: String, required: true },
       telephoneNumber: { type: String, required: true }
     },
-    menuItems: [{ type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' }],
+    menuItems: [
+      { quantity: { type: Number, default: 0 } },
+      { menuItem: { type: mongoose.Schema.Types.ObjectId, ref: 'MenuItem' } }
+    ],
     status: String //pending, inProgress, ready, done
   }, { timestamps: true })
 
