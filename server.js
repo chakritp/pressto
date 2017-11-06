@@ -7,7 +7,8 @@ const
   MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/pressto'
   PORT = process.env.PORT || 3001,
   usersRoutes = require('./routes/users.js'),
-  productsRoutes = require('./routes/products.js')
+  productsRoutes = require('./routes/products.js'),
+  ordersRoutes = require('./routes/orders.js')
 
 mongoose.connect(MONGODB_URI, (err) => {
   console.log(err || `Connected to MONGODB: ${MONGODB_URI}`)
@@ -22,6 +23,7 @@ app.get('/api', (req, res) => {
 
 app.use('/api/users', usersRoutes)
 app.use('/api/products', productsRoutes)
+app.use('/api/orders', ordersRoutes)
 
 app.listen(PORT, (err) => {
   console.log(err || `Server running on port ${PORT}`)
