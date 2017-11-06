@@ -1,7 +1,7 @@
 const
   express = require('express'),
   menuItemsRouter = new express.Router(),
-  menuItemsCtrl = require('./controllers/menuItems.js'),
+  menuItemsCtrl = require('../controllers/menuItems.js'),
   verifyToken = require('../serverAuth.js').verifyToken
 
 menuItemsRouter.route('/')
@@ -13,6 +13,6 @@ menuItemsRouter.route('/:id')
   .patch(menuItemsCtrl.update)
   .delete(menuItemsCtrl.destroy)
 
-menuItemsRouter.get('/:id/edit', menuItemsRouter.edit)
+// menuItemsRouter.get('/:id/edit', menuItemsRouter.edit)
 
 module.exports = menuItemsRouter

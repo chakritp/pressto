@@ -6,7 +6,8 @@ const
   mongoose = require('mongoose'),
   MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/pressto'
   PORT = process.env.PORT || 3001,
-  usersRoutes = require('./routes/users.js')
+  usersRoutes = require('./routes/users.js'),
+  menuItemsRoutes = require('./routes/menuItems.js')
 
 mongoose.connect(MONGODB_URI, (err) => {
   console.log(err || `Connected to MONGODB: ${MONGODB_URI}`)
@@ -20,6 +21,7 @@ app.get('/api', (req, res) => {
 })
 
 app.use('/api/users', usersRoutes)
+app.use('/api/menu-items', menuItemsRoutes)
 
 app.listen(PORT, (err) => {
   console.log(err || `Server running on port ${PORT}`)
