@@ -1,24 +1,30 @@
 import React from 'react'
 import StripeCheckout from 'react-stripe-checkout'
+import axios from 'axios'
 
 class Checkout extends React.Component {
-  onToken(token) {
-    fetch('/api/save-stripe-token', {
+  onToken(amount, description, token) {
+    var data = {
+      token,
+      description,
+      amount
+    }
+    axios({
+      url: '/api/charge',
       method: 'POST',
-      body: JSON.stringify(token)
+      data: data
     }).then(res => {
       console.log(res)
-      res.json().then(data => {
-        alert('We are in business')
-      })
     })
   }
 
   render() {
     return (
       <StripeCheckout
-        token={this.onToken.bind(this)}
+        token={this.onToken.bind(this, 10000, "test")}
         stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
+        amount={10000}
+        currency="USD"
         label="Checkout"
       />
     )
