@@ -5,7 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { StripeProvider } from 'react-stripe-elements'
 
 import App from './App';
-console.log(process.env)
+
 ReactDOM.render(
   <Router>
     <StripeProvider apiKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}>
