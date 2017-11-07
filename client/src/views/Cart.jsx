@@ -1,7 +1,6 @@
 import React from 'react'
-import { Elements } from 'react-stripe-elements'
 
-import CheckoutForm from './CheckoutForm'
+import Checkout from './Checkout'
 
 class Cart extends React.Component {
   state = {
@@ -82,10 +81,9 @@ class Cart extends React.Component {
                   </div>
                 )
               })}
-              <button>Order</button>
-              <Elements>
-                <CheckoutForm />
-              </Elements>
+              {/* <button>Order</button> */}
+
+              <Checkout />
             </div>
           )
         }
