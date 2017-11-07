@@ -12,36 +12,37 @@ class App extends Component {
     shoppingCart: [] // { product, qty }
   }
   
-  // componentDidMount() {
-  //   this.setState({
-      
-  //   })
-  // }
+  componentDidMount() {
+    var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
+    
+    this.setState({
+      shoppingCart: itemsArray 
+    })
+  }
   
   updateCart(item, quantity=1) {
-    // first solution
-    // if the item already exists in local storage, add the inputted quantity to the existing quantity
-    // var newQuantity = localStorage.getItem(item.name) ? Number(localStorage.getItem(item.name)) + Number(quantity) : quantity
-    // localStorage.setItem(item.name, newQuantity)
-
+    var itemsArray = JSON.parse(localStorage.getItem('itemsArray'))
     
-    var items = JSON.parse(localStorage.getItem('items'))
-    // console.log(items)
-    
-    if(!items){ // items hasn't been initialized yet
-      var items = {}
-      items[item.name] = { item, quantity }
+    if(!itemsArray){ // items hasn't been initialized yet
+      var itemsArray = []
+      itemsArray.push({item, quantity})
     }
-    else { // append the quantity of the product in the existing local storage
-      for(var key in items) {
-        if(items[key].item.name === key){
-          var newQuantity = Number(items[key].quantity) + Number(quantity)
-          items[key].quantity = newQuantity
+    else { // in the case that the array isn't empty
+      var itemExists = false
+      for(var index in itemsArray) {
+        let currentItem = itemsArray[index].item
+
+        if(currentItem.name == item.name) { // if the item exists in local storage, increment the quantity of it
+          itemsArray[index].quantity = Number(itemsArray[index].quantity) + Number(quantity)
+          itemExists = true
         }
       }
-    }
-    localStorage.setItem('items', JSON.stringify(items))
 
+      //if item doesn't exist add the item to the array
+      if(!itemExists) itemsArray.push({item, quantity})
+    }
+    
+    localStorage.setItem('itemsArray', JSON.stringify(itemsArray))
 
     this.setState({
       shoppingCart: [

@@ -6,21 +6,22 @@ class Cart extends React.Component {
   }
 
   componentDidMount() {
-    // this.setState({
-    //   shoppingCart: 
-    // })
+    var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
+    this.setState({
+      shoppingCart: itemsArray
+    })
   }
   
   render() {
     return (
       <div className="Cart">
         <h1>Cart</h1>
-        {this.state.shoppingCart.length === 0
+        {!this.state.shoppingCart
         ? (<div>No items in the cart...</div>)
         : (
             <div className="products">
               {this.state.shoppingCart.map(product => {
-                <div>{product.name}, Quantity: {product.quantity}</div>
+                return <div key={product.item._id}>{product.item.name}, Quantity: {product.quantity}</div>
               })}
             </div>
           )
