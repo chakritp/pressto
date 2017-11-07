@@ -29,6 +29,14 @@ class Cart extends React.Component {
       shoppingCart: itemsArray
     })
   }
+
+  clearCart() {
+    localStorage.setItem('itemsArray', null)
+
+    this.setState({
+      shoppingCart: []
+    })
+  }
   
   render() {
     return (
@@ -38,6 +46,7 @@ class Cart extends React.Component {
         ? (<div>No items in the cart...</div>)
         : (
             <div className="products">
+              <button onClick={this.clearCart.bind(this)}>Clear Cart</button>
               {this.state.shoppingCart.map(product => {
                 return (
                   <div key={product.item._id} style={{marginBottom: "30px"}}>
