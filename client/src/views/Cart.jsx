@@ -37,6 +37,27 @@ class Cart extends React.Component {
       shoppingCart: []
     })
   }
+
+  onQuantityChange(evt, id) {
+    console.log(evt.target.value, id)
+
+    //set value of cart in localStorage
+    var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
+    for (var index in itemsArray) {
+      if (itemsArray[index].item._id === id) { // if the item matches the id that we want to remove
+        //change quantity of that item
+        itemsArray[index].quantity = evt.target.value
+      }
+    }
+
+    // save to local storage
+    localStorage.setItem('itemsArray', JSON.stringify(itemsArray))
+
+    //remove item from state
+    this.setState({
+      shoppingCart: itemsArray
+    })
+  }
   
   render() {
     return (
@@ -47,13 +68,13 @@ class Cart extends React.Component {
         : (
             <div className="products">
               <button onClick={this.clearCart.bind(this)}>Clear Cart</button>
-              {this.state.shoppingCart.map(product => {
+              {this.state.shoppingCart.map(cartItem => {
                 return (
-                  <div key={product.item._id} style={{marginBottom: "30px"}}>
-                    <img src={product.item.image} width="300" /> <br/>
-                    {product.item.name} <br/>
-                    Quantity: <input type="number" defaultValue={product.quantity} /> <br/>
-                    <button onClick={() => {this.removeCartItem(product.item._id)}}>Remove From Cart</button>
+                  <div key={cartItem.item._id} style={{marginBottom: "30px"}}>
+                    <img src={cartItem.item.image} width="300" /> <br/>
+                    {cartItem.item.name} <br/>
+                    Quantity: <input onChange={(evt) => {this.onQuantityChange(evt, cartItem.item._id)}} type="number" defaultValue={cartItem.quantity} ref={cartItem.item._id + '-quantity'} /> <br/>
+                    <button onClick={() => {this.removeCartItem(cartItem.item._id)}}>Remove From Cart</button>
                   </div>
                 )
               })}
