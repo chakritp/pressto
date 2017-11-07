@@ -9,8 +9,6 @@ class Menu extends React.Component {
   componentDidMount() {
     axios({method: 'get', url: '/api/products'})
       .then(res => {
-        var menuItems = res.data.products
-        console.log(menuItems)
         this.setState({
           products: res.data.products
         })
@@ -26,15 +24,15 @@ class Menu extends React.Component {
             <div>Loading...</div>
           ) 
         : (
-            <div className="menuItems">
+            <div className="products">
               {this.state.products.map(product => {
                 return (
                   <div key={product._id} style={{marginBottom: '30px'}}>
                     <img src={product.image} width="300" /> <br/>
                     <b>{product.name}</b> <br/>
                     {product.description} <br/>
-                    <span>Quantity: <input type="number" defaultValue="1"/></span> <br/>
-                    <button>Add to Cart</button>
+                    <span>Quantity: <input type="number" defaultValue="1" ref={product._id + "-quantity"} /></span> <br/>
+                    <button onClick={() => { this.props.onUpdateCart(product, this.refs[product._id + "-quantity"].value) }}>Add to Cart</button>
                   </div>
                 )
               })}
