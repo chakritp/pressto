@@ -2,7 +2,8 @@ import React from 'react'
 
 class Cart extends React.Component {
   state = {
-    shoppingCart: []
+    shoppingCart: [],
+    total: 0
   }
 
   componentDidMount() {

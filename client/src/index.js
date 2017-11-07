@@ -1,9 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
-import { BrowserRouter as Router } from 'react-router-dom' 
+import { BrowserRouter as Router } from 'react-router-dom'
+import { StripeProvider } from 'react-stripe-elements'
 
 import App from './App';
+console.log(process.env)
+ReactDOM.render(
+  <Router>
+    <StripeProvider apiKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}>
+      <App />
+    </StripeProvider>
+  </Router>, document.getElementById('root'));
 
-ReactDOM.render(<Router><App /></Router>, document.getElementById('root'));
 registerServiceWorker();
