@@ -12,17 +12,43 @@ class Cart extends React.Component {
     })
   }
   
+  removeCartItem(id) {
+    //remove item from local storage
+    var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
+    for(var index in itemsArray) {
+      if(itemsArray[index].item._id === id) { // if the item matches the id that we want to remove
+        //remove item from array
+        itemsArray.splice(index, 1)
+      }
+    }
+    // save to local storage
+    localStorage.setItem('itemsArray', JSON.stringify(itemsArray))
+
+    //remove item from state
+    this.setState({
+      shoppingCart: itemsArray
+    })
+  }
+  
   render() {
     return (
       <div className="Cart">
         <h1>Cart</h1>
-        {!this.state.shoppingCart
+        {this.state.shoppingCart.length == 0
         ? (<div>No items in the cart...</div>)
         : (
             <div className="products">
               {this.state.shoppingCart.map(product => {
-                return <div key={product.item._id}>{product.item.name}, Quantity: {product.quantity}</div>
+                return (
+                  <div key={product.item._id} style={{marginBottom: "30px"}}>
+                    <img src={product.item.image} width="300" /> <br/>
+                    {product.item.name} <br/>
+                    Quantity: <input type="number" defaultValue={product.quantity} /> <br/>
+                    <button onClick={() => {this.removeCartItem(product.item._id)}}>Remove From Cart</button>
+                  </div>
+                )
               })}
+              <button>Order</button>
             </div>
           )
         }
