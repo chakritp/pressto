@@ -4,11 +4,14 @@ import axios from 'axios'
 
 class Checkout extends React.Component {
   onToken(amount, description, token) {
+    console.log('here')
+
     var data = {
       token,
       description,
       amount
     }
+
     axios({
       url: '/api/charge',
       method: 'POST',
@@ -21,6 +24,7 @@ class Checkout extends React.Component {
   render() {
     return (
       <StripeCheckout
+        name="Pressto Checkout"
         token={this.onToken.bind(this, 10000, "test")}
         stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
         amount={10000}
