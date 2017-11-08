@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import moment from 'moment'
 
 class Order extends React.Component {
   state = {
@@ -38,7 +39,7 @@ class Order extends React.Component {
                         return (<li key={item._id}>{item.product} (QTY: {item.quantity}) </li>)
                       })} <br/>
                     </ul>
-                    Date: {order.createdAt}
+                    Date: {moment(order.createdAt).format('MMMM Do YYYY, h:mm a')}
                   </div>
                 )
               })}
