@@ -36,7 +36,7 @@ class Order extends React.Component {
                     Items:
                     <ul>
                       {order.items.map((item) => {
-                        return (<li key={item._id}>{item.product} (QTY: {item.quantity}) </li>)
+                        return (<li key={item._id}>{item.product.name} (QTY: {item.quantity}) </li>)
                       })} <br/>
                     </ul>
                     Date: {moment(order.createdAt).format('MMMM Do YYYY, h:mm a')}

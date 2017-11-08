@@ -3,7 +3,9 @@ const
 
 module.exports = {
   index: (req, res) => {
-    Order.find({}).populate('product').exec((err, orders) => {
+    Order.find({})
+    .populate('items.product')
+    .exec((err, orders) => {
       if (err) return res.json({ success: false, message: "Something went wrong. Please try again." })
       res.json({ success: true, orders })
     })
