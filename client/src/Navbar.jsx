@@ -9,6 +9,7 @@ const NavBar = (props) => {
         <li><Link to="/menu">Menu</Link></li>
         <li>Sign In</li>
         <li><Link to="/cart">View Cart</Link></li>
+        <li><Link to="/order-history">Orders</Link></li>
       </ul>
     </div>
   )

@@ -6,6 +6,7 @@ class Cart extends React.Component {
   state = {
     shoppingCart: [],
     name: "",
+    telephone: "",
     description: "",
     subtotal: 0.00,
     tax: 0.00,
@@ -43,8 +44,6 @@ class Cart extends React.Component {
     var tax = this.calculateTax(subtotal)
     var total = this.calculateTotal(subtotal, tax)
     var description = this.formatDescription(itemsArray)
-
-    console.log(description)
 
     this.setState({
       shoppingCart: itemsArray,
@@ -122,9 +121,9 @@ class Cart extends React.Component {
     })
   }
 
-  onNameChange() {
+  onFieldChange(evt) {
     this.setState({
-      name: this.refs.name.value
+      [evt.target.name]: evt.target.value
     })
   }
   
@@ -154,11 +153,16 @@ class Cart extends React.Component {
                 <p><b>Total: ${this.state.total}</b></p>
               </div>
               <hr/>
-              Name
-              <input onChange={this.onNameChange.bind(this)} type="text" ref="name" /> <br/>
-              {!this.state.name
-              ? <span>Please fill in your name to complete this order</span>
-              : <Checkout amount={this.state.total} description={this.state.description} customerName={this.state.name}/>
+              <input onChange={(evt) => {this.onFieldChange(evt)}} type="text" name="name" placeholder="Name" /> <br/>
+              <input onChange={(evt) => {this.onFieldChange(evt)}} type="tel" name="telephone" placeholder="Telephone"/> <br/>
+              {!this.state.name || !this.state.telephone
+              ? <span>Please fill in your name and telephone number to complete this order</span>
+              : <Checkout
+                  shoppingCart={this.state.shoppingCart}
+                  amount={this.state.total}
+                  description={this.state.description}
+                  customerName={this.state.name}
+                  telephone={this.state.telephone} />
               }
             </div>
           )
