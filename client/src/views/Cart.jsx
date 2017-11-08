@@ -5,6 +5,8 @@ import Checkout from './Checkout'
 class Cart extends React.Component {
   state = {
     shoppingCart: [],
+    name: "",
+    description: "",
     subtotal: 0.00,
     tax: 0.00,
     total: 0.00
@@ -12,11 +14,9 @@ class Cart extends React.Component {
 
   calculateSubtotal(items) {
     var subtotal = 0
-    console.log(items)
     for(var index in items) {
       subtotal += Number(items[index].quantity) * Number(items[index].item.price)
     }
-    console.log(subtotal)
     return subtotal.toFixed(2)
   }
 
@@ -28,18 +28,30 @@ class Cart extends React.Component {
     return (Number(subtotal) + Number(tax)).toFixed(2)
   }
 
+  formatDescription(items) {
+    var description = ""
+    for (var index in items) {
+      description += `${items[index].item.name} (QTY: ${items[index].quantity}) --- `
+    }
+    return description
+  }
+
   componentDidMount() {
     var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
 
     var subtotal = this.calculateSubtotal(itemsArray)
     var tax = this.calculateTax(subtotal)
     var total = this.calculateTotal(subtotal, tax)
+    var description = this.formatDescription(itemsArray)
+
+    console.log(description)
 
     this.setState({
       shoppingCart: itemsArray,
       subtotal: subtotal,
       tax: tax,
-      total: total
+      total: total,
+      description: description
     })
   }
   
@@ -58,13 +70,15 @@ class Cart extends React.Component {
     var subtotal = this.calculateSubtotal(itemsArray)
     var tax = this.calculateTax(subtotal)
     var total = this.calculateTotal(subtotal, tax)
+    var description = this.formatDescription(itemsArray)
 
     //remove item from state
     this.setState({
       shoppingCart: itemsArray,
       subtotal: subtotal,
       tax: tax,
-      total: total
+      total: total,
+      description: description
     })
   }
 
@@ -75,7 +89,8 @@ class Cart extends React.Component {
       shoppingCart: [],
       subtotal: 0,
       tax: 0,
-      total: 0
+      total: 0,
+      description: ""
     })
   }
 
@@ -95,13 +110,21 @@ class Cart extends React.Component {
     var subtotal = this.calculateSubtotal(itemsArray)
     var tax = this.calculateTax(subtotal)
     var total = this.calculateTotal(subtotal, tax)
+    var description = this.formatDescription(itemsArray)
 
     //remove item from state
     this.setState({
       shoppingCart: itemsArray,
       subtotal: subtotal,
       tax: tax,
-      total: total
+      total: total,
+      description: description
+    })
+  }
+
+  onNameChange() {
+    this.setState({
+      name: this.refs.name.value
     })
   }
   
@@ -124,7 +147,6 @@ class Cart extends React.Component {
                   </div>
                 )
               })}
-              {/* <button>Order</button> */}
               <hr/>
               <div>
                 <p>Subtotal: ${this.state.subtotal}</p>
@@ -133,9 +155,11 @@ class Cart extends React.Component {
               </div>
               <hr/>
               Name
-              <input type="text"/> <br/>
-
-              <Checkout amount={this.state.total} />
+              <input onChange={this.onNameChange.bind(this)} type="text" ref="name" /> <br/>
+              {!this.state.name
+              ? <span>Please fill in your name to complete this order</span>
+              : <Checkout amount={this.state.total} description={this.state.description} customerName={this.state.name}/>
+              }
             </div>
           )
         }

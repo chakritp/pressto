@@ -3,13 +3,11 @@ import StripeCheckout from 'react-stripe-checkout'
 import axios from 'axios'
 
 class Checkout extends React.Component {
-  onToken(amount, description, token) {
-    console.log('here')
-
+  onToken(name, amount, description, token) {
     var data = {
       token,
-      description,
-      amount
+      description: "Name: " + name + "-> " + description,
+      amount: amount * 100 //value in cents
     }
 
     axios({
@@ -25,9 +23,9 @@ class Checkout extends React.Component {
     return (
       <StripeCheckout
         name="Pressto Checkout"
-        token={this.onToken.bind(this, 10000, "test")}
+        token={this.onToken.bind(this, this.props.customerName, this.props.amount, this.props.description)}
         stripeKey={process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY}
-        amount={10000}
+        amount={Number(this.props.amount) * 100}
         currency="USD"
         label="Checkout"
       />
