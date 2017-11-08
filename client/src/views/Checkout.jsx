@@ -32,15 +32,14 @@ class Checkout extends React.Component {
         method: 'POST',
         data: orderData
       }).then(res => {
-        console.log(res)
         // order saved to mongo
+        console.log(res)
+
+        //clear shopping cart from local storage
+        this.props.clearCart()
+        
+        //redirect to menu page
       })
-
-
-      //clear shopping cart from local storage
-      // localStorage.setItem('itemsArray', null)
-
-      //redirect to menu page
     })
   }
 
