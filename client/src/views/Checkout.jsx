@@ -17,8 +17,25 @@ class Checkout extends React.Component {
     }).then(res => {
       console.log(res)
       var shoppingCart = this.props.shoppingCart
+      var orderData = {
+        stripeId: res.data.charge.id,
+        customer: {
+          name: this.props.customerName,
+          telephone: this.props.telephone
+        },
+        items: this.props.shoppingCart.map((cartItem) => { return { product: cartItem.item._id, quantity: cartItem.quantity } }), //map item quantity and id here
+      }
       
       // create order from shopping cart
+      axios({
+        url: '/api/orders',
+        method: 'POST',
+        data: orderData
+      }).then(res => {
+        console.log(res)
+        // order saved to mongo
+      })
+
 
       //clear shopping cart from local storage
       // localStorage.setItem('itemsArray', null)

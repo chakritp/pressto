@@ -28,6 +28,13 @@ app.get('/api', (req, res) => {
 
 app.use('/api/users', usersRoutes)
 app.use('/api/products', productsRoutes)
+
+// attach io server to request object for orders create route
+// app.use((req, res, next) => {
+//   req.io = io
+//   next()
+// })
+
 app.use('/api/orders', ordersRoutes)
 
 app.post('/api/charge', (req, res) => {
