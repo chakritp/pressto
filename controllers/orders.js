@@ -3,7 +3,9 @@ const
 
 module.exports = {
   index: (req, res) => {
-    Order.find({}, (err, orders) => {
+    Order.find({})
+    .populate('items.product')
+    .exec((err, orders) => {
       if (err) return res.json({ success: false, message: "Something went wrong. Please try again." })
       res.json({ success: true, orders })
     })
@@ -18,7 +20,9 @@ module.exports = {
 
   create: (req, res) => {
     Order.create(req.body, (err, order) => {
-      if (err) return res.json({ success: false, message: "Something went wrong. Please try again." })
+      if (err) return res.json({ success: false, message: "Something went wrong. Please try again.", error: err })
+
+      // io.emit('new-order', order)
       res.json({ success: true, message: "Successfully created order", order })
     })
   },

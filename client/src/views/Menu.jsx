@@ -29,7 +29,7 @@ class Menu extends React.Component {
                 return (
                   <div key={product._id} style={{marginBottom: '30px'}}>
                     <img src={product.image} width="300" /> <br/>
-                    <b>{product.name}</b> <br/>
+                    <b>{product.name}</b> - ${product.price} <br/>
                     {product.description} <br/>
                     <span>Quantity: <input type="number" defaultValue="1" ref={product._id + "-quantity"} /></span> <br/>
                     <button onClick={() => { this.props.onUpdateCart(product, this.refs[product._id + "-quantity"].value) }}>Add to Cart</button>

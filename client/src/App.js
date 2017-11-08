@@ -6,6 +6,7 @@ import Navbar from './Navbar'
 import Home from './views/Home'
 import Menu from './views/Menu'
 import Cart from './views/Cart'
+import Order from './views/Order'
 
 class App extends Component {
   state = {
@@ -62,6 +63,7 @@ class App extends Component {
             return <Menu {...props} onUpdateCart={this.updateCart.bind(this)}/>
           }} />
           <Route path="/cart" component={Cart} />
+          <Route path="/order-history" component={Order} />
         </Switch>
       </div>
     );
