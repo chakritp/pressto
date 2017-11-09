@@ -6,12 +6,13 @@ const
   mongoose = require('mongoose'),
   dotenv = require('dotenv').config(),
   MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/pressto',
-  SOCKET_PORT = process.env.SOCKET_PORT || 3002,
+  // SOCKET_PORT = process.env.SOCKET_PORT || 3002,
   PORT = process.env.PORT || 3001,
   keyPublishable = process.env.STRIPE_PUBLISHABLE_KEY,
   keySecret = process.env.STRIPE_SECRET_KEY,
   stripe = require('stripe')(keySecret),
-  io = require('socket.io')(),
+  http = require('http').Server(app)
+  io = require('socket.io')(http),
   usersRoutes = require('./routes/users.js'),
   productsRoutes = require('./routes/products.js'),
   ordersRoutes = require('./routes/orders.js'),
@@ -57,9 +58,9 @@ app.post('/api/charge', (req, res) => {
 
 // web socket server
 io.on('connection', (client) => {
+  console.log('client connected')
   Order.find({}).populate('items.product').exec((err, orders) => {
     if(err) return console.log(err)
-    console.log('client connected')
     io.emit('orders', orders)
   })
 
@@ -97,13 +98,13 @@ io.on('connection', (client) => {
   })
 })
 
-io.listen(SOCKET_PORT)
+// io.listen(SOCKET_PORT)
 
 //applies to the deployed application
 app.use('*', (req, res) => {
   res.sendFile(`${__dirname}/client/build/index.html`)
 })
 
-app.listen(PORT, (err) => {
+http.listen(PORT, (err) => {
   console.log(err || `Server running on port ${PORT}`)
 })

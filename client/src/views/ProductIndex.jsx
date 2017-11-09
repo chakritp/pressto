@@ -27,7 +27,9 @@ class ProductIndex extends React.Component {
           return (
             <div key={product._id}>
               Name: {product.name} <br/>
-              description: {product.description} <br/>
+              Price: ${product.price} <br/>
+              Description: {product.description} <br/>
+              Category: {product.category} <br/>
               <button>Edit</button>
               <button>Delete</button>
               <hr/>
