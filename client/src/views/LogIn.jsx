@@ -18,6 +18,7 @@ class LogIn extends React.Component {
   onFormSubmit(evt) {
     evt.preventDefault()
     clientAuth.logIn(this.state.fields).then(user => {
+      console.log(user)
       this.setState({ fields: { email: '', password: '' } })
       if(user) {
         this.props.onLoginSuccess(user)
@@ -32,8 +33,8 @@ class LogIn extends React.Component {
       <div className="LogIn">
         <h1>Log In</h1>
         <form onChange={this.onInputChange.bind(this)} onSubmit={this.onFormSubmit.bind(this)}>
-          <input type="text" placeholder="Email" value={email}/>
-          <input type="password" placeholder="Password" value={password}/>
+          <input type="text" placeholder="Email" name="email" value={email}/>
+          <input type="password" placeholder="Password" name="password" value={password}/>
           <button>Log In</button>
         </form>
       </div>

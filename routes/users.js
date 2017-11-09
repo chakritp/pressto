@@ -15,6 +15,6 @@ usersRouter.route('/:id')
   .delete(usersCtrl.destroy)
 
 usersRouter.get('/:id/edit', usersCtrl.edit)
-// usersRouter.post('/authenticate', usersCtrl.authenticate)
+usersRouter.post('/authenticate', usersCtrl.authenticate)
 
 module.exports = usersRouter

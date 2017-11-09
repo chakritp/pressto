@@ -72,9 +72,10 @@ class App extends Component {
   }
 
   render() {
+    const { currentUser } = this.state
     return (
       <div className="App">
-        <Navbar />
+        <Navbar currentUser={currentUser} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/menu" render={(props) => {
@@ -86,8 +87,12 @@ class App extends Component {
           <Route path="/current-orders" component={CurrentOrder} />
           <Route path="/products" component={ProductIndex} />
           <Route path="/products/:id/edit" component={ProductEdit} />
-          <Route path="/login" component={LogIn} />
-          <Route path="/logout" component={LogOut} />
+          <Route path="/login" render={(props) => {
+            return <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+          }} />
+          <Route path="/logout" render={(props) => {
+            return <LogOut onLogOut={this.logout.bind(this)} />
+          }} />
         </Switch>
       </div>
     );
