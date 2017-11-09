@@ -9,6 +9,8 @@ import Cart from './views/Cart'
 import Order from './views/Order'
 import CurrentOrder from './views/CurrentOrder'
 import OrderConfirmation from './views/OrderConfirmation'
+import ProductIndex from './views/ProductIndex'
+import ProductEdit from './views/ProductEdit'
 
 class App extends Component {
   state = {
@@ -68,6 +70,8 @@ class App extends Component {
           <Route path="/order-history" component={Order} />
           <Route path="/order-confirmation/:id" component={OrderConfirmation} />
           <Route path="/current-orders" component={CurrentOrder} />
+          <Route path="/products" component={ProductIndex} />
+          <Route path="/products/:id/edit" component={ProductEdit} />
         </Switch>
       </div>
     );
