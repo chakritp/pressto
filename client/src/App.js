@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import './styles.css'
+import clientAuth from './clientAuth.js'
 
 import Navbar from './Navbar'
 import Home from './views/Home'
@@ -11,18 +12,31 @@ import CurrentOrder from './views/CurrentOrder'
 import OrderConfirmation from './views/OrderConfirmation'
 import ProductIndex from './views/ProductIndex'
 import ProductEdit from './views/ProductEdit'
+import LogIn from './views/LogIn'
+import LogOut from './views/LogOut'
 
 class App extends Component {
   state = {
-    shoppingCart: [] // { product, qty }
+    shoppingCart: [], // { product, qty }
+    currentUser: null
   }
   
   componentDidMount() {
     var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
     
     this.setState({
+      currentUser: clientAuth.getCurrentUser(),
       shoppingCart: itemsArray 
     })
+  }
+
+  onLoginSuccess(user) {
+    this.setState({ currentUser: clientAuth.getCurrentUser()})
+  }
+
+  logout() {
+    clientAuth.logOut()
+    this.setState({currentUser: null})
   }
   
   updateCart(item, quantity=1) {
@@ -72,6 +86,8 @@ class App extends Component {
           <Route path="/current-orders" component={CurrentOrder} />
           <Route path="/products" component={ProductIndex} />
           <Route path="/products/:id/edit" component={ProductEdit} />
+          <Route path="/login" component={LogIn} />
+          <Route path="/logout" component={LogOut} />
         </Switch>
       </div>
     );
