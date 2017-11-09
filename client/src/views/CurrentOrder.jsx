@@ -1,6 +1,7 @@
 import React from 'react'
 import openSocket from 'socket.io-client'
 
+// for url may have to use conditional domain (i.e. localhost for dev, or url for production)
 
 const socket = openSocket('http://localhost:3002')
 
@@ -76,10 +77,10 @@ class CurrentOrder extends React.Component {
           {this.state.pendingOrders.map((order) => {
             return (
               <div key={order._id}>
-                <b>{order.customer.name}</b>
+                <b>#{order.id} - {order.customer.name}</b>
                 <ul className="orders">
                   {order.items.map((item) => {
-                    return <li key={item._id}>{item.product.name} (QTY: {item.quantity})</li>
+                    return <li key={item._id}>{item.quantity} {item.product.name}</li>
                   })}
                 </ul>
                 <button onClick={() => { this.onMoveToInProgress(order._id) }}>Move to In Progress</button>
@@ -93,10 +94,10 @@ class CurrentOrder extends React.Component {
           {this.state.inProgressOrders.map((order) => {
             return (
               <div key={order._id}>
-                <b>{order.customer.name}</b>
+                <b>#{order.id}- {order.customer.name}</b>
                 <ul className="orders">
                   {order.items.map((item) => {
-                    return <li key={item._id}>{item.product.name} (QTY: {item.quantity})</li>
+                    return <li key={item._id}>{item.quantity} {item.product.name}</li>
                   })}
                 </ul>
                 <button onClick={() => { this.onMoveToDone(order._id) }}>Move to Done</button>
@@ -110,10 +111,10 @@ class CurrentOrder extends React.Component {
           {this.state.doneOrders.map((order) => {
             return (
               <div key={order._id}>
-                <b>{order.customer.name}</b>
+                <b>#{order.id}- {order.customer.name}</b>
                 <ul className="orders">
                   {order.items.map((item) => {
-                    return <li key={item._id}>{item.product.name} (QTY: {item.quantity})</li>
+                    return <li key={item._id}>{item.quantity} {item.product.name}</li>
                   })}
                 </ul>
                 <button onClick={() => { this.onMoveToArchive(order._id) }}>Archive</button>

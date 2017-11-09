@@ -6,7 +6,7 @@ const
   mongoose = require('mongoose'),
   dotenv = require('dotenv').config(),
   MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/pressto',
-  SOCKET_PORT = 3002,
+  SOCKET_PORT = process.env.SOCKET_PORT || 3002,
   PORT = process.env.PORT || 3001,
   keyPublishable = process.env.STRIPE_PUBLISHABLE_KEY,
   keySecret = process.env.STRIPE_SECRET_KEY,
@@ -98,7 +98,7 @@ io.on('connection', (client) => {
   })
 })
 
-io.listen(3002)
+io.listen(SOCKET_PORT)
 
 app.listen(PORT, (err) => {
   console.log(err || `Server running on port ${PORT}`)
