@@ -11,6 +11,7 @@ function signToken(user) {
 function verifyToken(req, res, next) {
   const token = req.get('token') || req.body.token || req.query.token
   if(!token) return res.json({success: false, message: "No token provided"})
+  
   jwt.verifyToken(token, process.env.JWT_SECRET, (err, decodedData) => {
     if(err) return res.json({success: false, message: "Invalid token"})
     User.findById(decodedData._id, (err, user) => {
