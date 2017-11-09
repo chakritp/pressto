@@ -12,3 +12,22 @@
     margin: 5px;
   }
 }
+
+.Order {
+  .order-box {
+    border: 1px solid black;
+    width: 30%;
+    margin: 0 auto;
+  }
+}
+
+.currentOrder {
+  & > div {
+    border: 1px solid black;
+    width: 30%;
+    display: inline-block;
+  }
+  ul {
+    list-style: none;
+  }
+}

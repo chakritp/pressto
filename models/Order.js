@@ -11,7 +11,7 @@ const
       telephone: String
     },
     items: [itemSchema],
-    status: { type: String, default: "pending" }//pending, inProgress, ready, done
+    status: { type: String, default: "pending" }//pending, in-progress, ready, archived
   }, { timestamps: true })
 
 module.exports = mongoose.model('Order', orderSchema)
