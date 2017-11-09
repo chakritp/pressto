@@ -18,6 +18,14 @@ class CurrentOrder extends React.Component {
     })
 
     // socket listener
+    socket.on('new-order', (data) => {
+      console.log('order', data)
+      console.log()
+      this.setState({
+        pendingOrders: [...this.state.pendingOrders, data]
+      })
+    })
+
     socket.on('orders', (data) => {
       console.log(data)
       var pendingOrders = []
@@ -44,7 +52,6 @@ class CurrentOrder extends React.Component {
         inProgressOrders: inProgressOrders,
         doneOrders: doneOrders,
       })
-
     })
   }
 

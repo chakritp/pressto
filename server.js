@@ -33,17 +33,15 @@ app.use('/api/users', usersRoutes)
 app.use('/api/products', productsRoutes)
 
 // attach io server to request object for orders create route
-// app.use((req, res, next) => {
-//   req.io = io
-//   next()
-// })
+app.use((req, res, next) => {
+  req.io = io
+  next()
+})
 
 app.use('/api/orders', ordersRoutes)
 
 app.post('/api/charge', (req, res) => {
-  let amount = 500
   console.log('***********HERE***************')
-  console.log(req.body)
   stripe.charges.create({
     amount: req.body.amount,
     description: req.body.description,
@@ -61,7 +59,7 @@ io.on('connection', (client) => {
   Order.find({}).populate('items.product').exec((err, orders) => {
     if(err) return console.log(err)
     console.log('client connected')
-    client.emit('orders', orders)
+    io.emit('orders', orders)
   })
 
   // listen when client clicks on 'move to inprogress'
@@ -70,7 +68,7 @@ io.on('connection', (client) => {
       if(err) return console.log(err)
       Order.find({}).populate('items.product').exec((err, orders) => {
         if (err) return console.log(err)
-        client.emit('orders', orders)
+        io.emit('orders', orders)
       })
     })
   })
