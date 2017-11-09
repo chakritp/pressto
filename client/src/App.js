@@ -87,9 +87,9 @@ class App extends Component {
             return <CurrentOrder {...props} currentUser={currentUser} />
           }} />
           <Route path="/login" render={(props) => {
-            return currentUser
+            return !currentUser
             ? <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
-              : <Redirect to="/order-history" />
+            : <Redirect to="/order-history" />
           }} />
 
 
