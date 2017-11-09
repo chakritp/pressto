@@ -90,7 +90,7 @@ class CurrentOrder extends React.Component {
                     return <li key={item._id}>{item.quantity} {item.product.name}</li>
                   })}
                 </ul>
-                <button onClick={() => { this.onMoveToInProgress(order._id) }}>Move to In Progress</button>
+                {this.props.currentUser ? <button onClick={() => { this.onMoveToInProgress(order._id) }}>Move to In Progress</button> : null}
               </div>
             )
           })}
@@ -107,7 +107,7 @@ class CurrentOrder extends React.Component {
                     return <li key={item._id}>{item.quantity} {item.product.name}</li>
                   })}
                 </ul>
-                <button onClick={() => { this.onMoveToDone(order._id) }}>Move to Done</button>
+                {this.props.currentUser ? <button onClick={() => { this.onMoveToDone(order._id) }}>Move to Done</button> : null}
               </div>
             )
           })}
@@ -124,7 +124,7 @@ class CurrentOrder extends React.Component {
                     return <li key={item._id}>{item.quantity} {item.product.name}</li>
                   })}
                 </ul>
-                <button onClick={() => { this.onMoveToArchive(order._id) }}>Archive</button>
+                {this.props.currentUser ? <button onClick={() => { this.onMoveToArchive(order._id) }}>Archive</button> : null}
               </div>
             )
           })}
