@@ -22,6 +22,7 @@ mongoose.connect(MONGODB_URI, (err) => {
   console.log(err || `Connected to MONGODB: ${MONGODB_URI}`)
 })
 
+app.use(express.static(`${__dirname}/client/build`)) //applies to the deployed application
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
