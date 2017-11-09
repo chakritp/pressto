@@ -98,6 +98,11 @@ io.on('connection', (client) => {
 
 io.listen(SOCKET_PORT)
 
+//applies to the deployed application
+app.use('*', (req, res) => {
+  res.sendFile(`${__dirname}/client/build/index.html`)
+})
+
 app.listen(PORT, (err) => {
   console.log(err || `Server running on port ${PORT}`)
 })
