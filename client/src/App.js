@@ -104,9 +104,10 @@ class App extends Component {
             ? <Order />
             : <Redirect to="/" />
           }} />
-          <Route path="/products" render={(props) => {
+
+          <Route exact path="/products" render={(props) => {
             return currentUser
-            ? <ProductIndex />
+            ? <ProductIndex {...props} />
             : <Redirect to="/" />
           }} />
 

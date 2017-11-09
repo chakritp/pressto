@@ -1,5 +1,6 @@
 import React from 'react'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 
 class ProductIndex extends React.Component {
   state = {
@@ -30,7 +31,7 @@ class ProductIndex extends React.Component {
               Price: ${product.price} <br/>
               Description: {product.description} <br/>
               Category: {product.category} <br/>
-              <button>Edit</button>
+              <Link to={`/products/${product._id}/edit`}>Edit</Link>
               <button>Delete</button>
               <hr/>
             </div>

@@ -10,7 +10,7 @@ module.exports = {
   },
 
   show: (req, res) => {
-    Product.find(req.params.id, (err, product) => {
+    Product.findById(req.params.id, (err, product) => {
       if(err) return res.json({ success: false, message: "Something went wrong. Please try again." })
       res.json({ success: true, product })
     })
