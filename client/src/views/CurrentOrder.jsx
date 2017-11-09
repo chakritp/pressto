@@ -2,7 +2,7 @@ import React from 'react'
 import openSocket from 'socket.io-client'
 
 // for url may have to use conditional domain (i.e. localhost for dev, or url for production)
-const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:3002'
+const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:3000'
 const socket = openSocket(socketUrl)
 
 class CurrentOrder extends React.Component {

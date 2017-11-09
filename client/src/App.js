@@ -20,12 +20,17 @@ class App extends Component {
     shoppingCart: [], // { product, qty }
     currentUser: null
   }
-  
+
+  componentWillMount() {
+    this.setState({
+      currentUser: clientAuth.getCurrentUser()
+    })
+  }
+
   componentDidMount() {
     var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
     
     this.setState({
-      currentUser: clientAuth.getCurrentUser(),
       shoppingCart: itemsArray 
     })
   }
