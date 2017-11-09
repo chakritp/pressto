@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import './styles.css'
 import clientAuth from './clientAuth.js'
 
@@ -82,13 +82,33 @@ class App extends Component {
             return <Menu {...props} onUpdateCart={this.updateCart.bind(this)}/>
           }} />
           <Route path="/cart" component={Cart} />
-          <Route path="/order-history" component={Order} />
           <Route path="/order-confirmation/:id" component={OrderConfirmation} />
-          <Route path="/current-orders" component={CurrentOrder} />
-          <Route path="/products" component={ProductIndex} />
-          <Route path="/products/:id/edit" component={ProductEdit} />
+          <Route path="/current-orders" render={(props) => {
+            return <CurrentOrder {...props} currentUser={currentUser} />
+          }} />
           <Route path="/login" render={(props) => {
-            return <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+            return currentUser
+            ? <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+              : <Redirect to="/order-history" />
+          }} />
+
+
+          {/* Admin Only Routes */}
+          <Route path="/order-history" render={(props) => {
+            return currentUser 
+            ? <Order />
+            : <Redirect to="/" />
+          }} />
+          <Route path="/products" render={(props) => {
+            return currentUser
+            ? <ProductIndex />
+            : <Redirect to="/" />
+          }} />
+
+          <Route path="/products/:id/edit" render={(props) => {
+            return currentUser
+              ? <ProductEdit {...props} />
+              : <Redirect to="/" />
           }} />
           <Route path="/logout" render={(props) => {
             return <LogOut onLogOut={this.logout.bind(this)} />
