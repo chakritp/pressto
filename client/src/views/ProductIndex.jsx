@@ -10,7 +10,11 @@ class ProductIndex extends React.Component {
   }
 
   render() {
-
+    return(
+      <div className="ProductIndex">
+        
+      </div>
+    )
   }
 }
 

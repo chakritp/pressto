@@ -10,6 +10,7 @@ import Order from './views/Order'
 import CurrentOrder from './views/CurrentOrder'
 import OrderConfirmation from './views/OrderConfirmation'
 import ProductIndex from './views/ProductIndex'
+import ProductEdit from './views/ProductEdit'
 
 class App extends Component {
   state = {
