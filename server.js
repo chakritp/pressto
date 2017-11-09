@@ -5,14 +5,17 @@ const
   bodyParser = require('body-parser'),
   mongoose = require('mongoose'),
   dotenv = require('dotenv').config(),
-  MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/pressto'
+  MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost/pressto',
+  SOCKET_PORT = process.env.SOCKET_PORT || 3002,
   PORT = process.env.PORT || 3001,
   keyPublishable = process.env.STRIPE_PUBLISHABLE_KEY,
   keySecret = process.env.STRIPE_SECRET_KEY,
   stripe = require('stripe')(keySecret),
+  io = require('socket.io')(),
   usersRoutes = require('./routes/users.js'),
   productsRoutes = require('./routes/products.js'),
-  ordersRoutes = require('./routes/orders.js')
+  ordersRoutes = require('./routes/orders.js'),
+  Order = require('./models/Order')
 
 
 mongoose.connect(MONGODB_URI, (err) => {
@@ -30,17 +33,15 @@ app.use('/api/users', usersRoutes)
 app.use('/api/products', productsRoutes)
 
 // attach io server to request object for orders create route
-// app.use((req, res, next) => {
-//   req.io = io
-//   next()
-// })
+app.use((req, res, next) => {
+  req.io = io
+  next()
+})
 
 app.use('/api/orders', ordersRoutes)
 
 app.post('/api/charge', (req, res) => {
-  let amount = 500
   console.log('***********HERE***************')
-  console.log(req.body)
   stripe.charges.create({
     amount: req.body.amount,
     description: req.body.description,
@@ -53,6 +54,49 @@ app.post('/api/charge', (req, res) => {
 })
 
 
+// web socket server
+io.on('connection', (client) => {
+  Order.find({}).populate('items.product').exec((err, orders) => {
+    if(err) return console.log(err)
+    console.log('client connected')
+    io.emit('orders', orders)
+  })
+
+  // listen when client clicks on 'move to inprogress'
+  client.on('move-to-inprogress', (id) => {
+    Order.findByIdAndUpdate(id, {status: 'in-progress'} , { new: true }, (err, order) => {
+      if(err) return console.log(err)
+      Order.find({}).populate('items.product').exec((err, orders) => {
+        if (err) return console.log(err)
+        io.emit('orders', orders)
+      })
+    })
+  })
+
+  // listen when client clicks on 'move to done'
+  client.on('move-to-done', (id) => {
+    Order.findByIdAndUpdate(id, { status: 'ready' }, { new: true }, (err, order) => {
+      if (err) return console.log(err)
+      Order.find({}).populate('items.product').exec((err, orders) => {
+        if (err) return console.log(err)
+        client.emit('orders', orders)
+      })
+    })
+  })
+
+  // listen when client clicks on 'move to archive'
+  client.on('move-to-archive', (id) => {
+    Order.findByIdAndUpdate(id, { status: 'archived' }, { new: true }, (err, order) => {
+      if (err) return console.log(err)
+      Order.find({}).populate('items.product').exec((err, orders) => {
+        if (err) return console.log(err)
+        client.emit('orders', orders)
+      })
+    })
+  })
+})
+
+io.listen(SOCKET_PORT)
 
 app.listen(PORT, (err) => {
   console.log(err || `Server running on port ${PORT}`)

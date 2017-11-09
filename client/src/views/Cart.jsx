@@ -162,7 +162,9 @@ class Cart extends React.Component {
                   amount={this.state.total}
                   description={this.state.description}
                   customerName={this.state.name}
-                  telephone={this.state.telephone} />
+                  telephone={this.state.telephone}
+                  clearCart={this.clearCart.bind(this)}
+                  history={this.props.history} />
               }
             </div>
           )

@@ -7,6 +7,8 @@ import Home from './views/Home'
 import Menu from './views/Menu'
 import Cart from './views/Cart'
 import Order from './views/Order'
+import CurrentOrder from './views/CurrentOrder'
+import OrderConfirmation from './views/OrderConfirmation'
 
 class App extends Component {
   state = {
@@ -64,6 +66,8 @@ class App extends Component {
           }} />
           <Route path="/cart" component={Cart} />
           <Route path="/order-history" component={Order} />
+          <Route path="/order-confirmation/:id" component={OrderConfirmation} />
+          <Route path="/current-orders" component={CurrentOrder} />
         </Switch>
       </div>
     );

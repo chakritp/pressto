@@ -29,7 +29,7 @@ class Order extends React.Component {
             <div className="orders-list">
               {this.state.orders.map(order => {
                 return (
-                  <div key={order._id}>
+                  <div key={order._id} className="order-box">
                     Stripe Id: {order.stripeId} <br/>
                     Customer Name: {order.customer.name} <br/>
                     Telephone: {order.customer.telephone} <br/>
