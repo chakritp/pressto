@@ -39,6 +39,7 @@ class Checkout extends React.Component {
         this.props.clearCart()
         
         //redirect to menu page
+        this.props.history.push('/order-confirmation/' + res.data.order._id)
       })
     })
   }

@@ -163,7 +163,8 @@ class Cart extends React.Component {
                   description={this.state.description}
                   customerName={this.state.name}
                   telephone={this.state.telephone}
-                  clearCart={this.clearCart.bind(this)} />
+                  clearCart={this.clearCart.bind(this)}
+                  history={this.props.history} />
               }
             </div>
           )
