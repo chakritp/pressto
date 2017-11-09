@@ -12,7 +12,7 @@ class ProductEdit extends React.Component {
   render() {
     return (
       <div className="ProductEdit">
-
+        <h1>Edit Product</h1>
       </div>
     )
   }

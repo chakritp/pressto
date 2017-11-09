@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 
 class ProductIndex extends React.Component {
   state = {
@@ -6,13 +7,33 @@ class ProductIndex extends React.Component {
   }
   
   componentDidMount() {
-
+    axios({
+      method: 'get',
+      url: '/api/products',
+    })
+    .then(res => {
+      console.log(res.data.products)
+      this.setState({
+        products: res.data.products  
+      })
+    })
   }
 
   render() {
     return(
       <div className="ProductIndex">
-        
+        <h1>Products</h1>
+        {this.state.products.map((product) => {
+          return (
+            <div key={product._id}>
+              Name: {product.name} <br/>
+              description: {product.description} <br/>
+              <button>Edit</button>
+              <button>Delete</button>
+              <hr/>
+            </div>
+          )
+        })}
       </div>
     )
   }
