@@ -1,5 +1,5 @@
 # Pressto
-======
+
 Pressto allows you to order drinks and food all from the convienience of your phone or tablet. Pressto takes credit and debit card payments through the Stripe API, a secure payment gateway. As an administrator, you are able to keep track of orders and update the status of orders, allowing customers to see the status of the orders realtime with Socket.io
 
 View the app [here](https://ga-pressto.herokuapp.com/)
