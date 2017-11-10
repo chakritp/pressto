@@ -49,6 +49,7 @@ class ProductIndex extends React.Component {
     return(
       <div className="ProductIndex">
         <h1>Products</h1>
+        <Link to='/products/new'>New Product + </Link>
         {this.state.products.map((product) => {
           return (
             <div key={product._id}>
