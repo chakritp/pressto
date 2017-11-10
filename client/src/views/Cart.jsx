@@ -95,33 +95,37 @@ class Cart extends React.Component {
 
   onQuantityChange(evt, id) {
     // prevent user from inputting quantity less than 1
-    if(evt.target.value <= 0) return (evt.target.value = 1)
-
-    //set value of cart in localStorage
-    var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
-    for (var index in itemsArray) {
-      if (itemsArray[index].item._id === id) { // if the item matches the id that we want to remove
-        //change quantity of that item
-        itemsArray[index].quantity = evt.target.value
+    if(evt.target.value > 0) {
+      //set value of cart in localStorage
+      var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
+      for (var index in itemsArray) {
+        if (itemsArray[index].item._id === id) { // if the item matches the id that we want to remove
+          //change quantity of that item
+          itemsArray[index].quantity = evt.target.value
+        }
       }
+  
+      // save to local storage
+      localStorage.setItem('itemsArray', JSON.stringify(itemsArray))
+  
+      var subtotal = this.calculateSubtotal(itemsArray)
+      var tax = this.calculateTax(subtotal)
+      var total = this.calculateTotal(subtotal, tax)
+      var description = this.formatDescription(itemsArray)
+  
+      //remove item from state
+      this.setState({
+        shoppingCart: itemsArray,
+        subtotal: subtotal,
+        tax: tax,
+        total: total,
+        description: description
+      })
     }
 
-    // save to local storage
-    localStorage.setItem('itemsArray', JSON.stringify(itemsArray))
-
-    var subtotal = this.calculateSubtotal(itemsArray)
-    var tax = this.calculateTax(subtotal)
-    var total = this.calculateTotal(subtotal, tax)
-    var description = this.formatDescription(itemsArray)
-
-    //remove item from state
-    this.setState({
-      shoppingCart: itemsArray,
-      subtotal: subtotal,
-      tax: tax,
-      total: total,
-      description: description
-    })
+    else {
+      this.props.showError("Must specify at least 1 quantity for this item")
+    }
   }
 
   onFieldChange(evt) {
@@ -138,14 +142,14 @@ class Cart extends React.Component {
         ? (<div>No items in the cart...</div>)
         : (
             <div className="products">
-              <button onClick={this.clearCart.bind(this)}>Clear Cart</button>
+              <button className="button is-danger clear-cart" onClick={this.clearCart.bind(this)}>Clear Cart</button>
               {this.state.shoppingCart.map(cartItem => {
                 return (
                   <div key={cartItem.item._id} style={{marginBottom: "30px"}}>
                     <img src={cartItem.item.image} width="300" /> <br/>
                     {cartItem.item.name} - ${cartItem.item.price}<br/>
-                    Quantity: <input onChange={(evt) => {this.onQuantityChange(evt, cartItem.item._id)}} type="number" defaultValue={cartItem.quantity} ref={cartItem.item._id + '-quantity'} /> <br/>
-                    <button onClick={() => {this.removeCartItem(cartItem.item._id)}}>Remove From Cart</button>
+                    Quantity: <input className="input quantity" onChange={(evt) => {this.onQuantityChange(evt, cartItem.item._id)}} type="number" defaultValue={cartItem.quantity} ref={cartItem.item._id + '-quantity'} /> <br/>
+                    <button className="button is-warning" onClick={() => {this.removeCartItem(cartItem.item._id)}}>Remove From Cart</button>
                   </div>
                 )
               })}
@@ -156,8 +160,8 @@ class Cart extends React.Component {
                 <p><b>Total: ${this.state.total}</b></p>
               </div>
               <hr/>
-              <input onChange={(evt) => {this.onFieldChange(evt)}} type="text" name="name" placeholder="Name" /> <br/>
-              <input onChange={(evt) => {this.onFieldChange(evt)}} type="tel" name="telephone" placeholder="Telephone"/> <br/>
+              <input className="input name-field" onChange={(evt) => {this.onFieldChange(evt)}} type="text" name="name" placeholder="Name" /> <br/>
+              <input className="input telephone-field" onChange={(evt) => {this.onFieldChange(evt)}} type="tel" name="telephone" placeholder="Telephone"/> <br/>
               {!this.state.name || !this.state.telephone
               ? <span>Please fill in your name and telephone number to complete this order</span>
               : <Checkout

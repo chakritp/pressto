@@ -49,21 +49,38 @@ class ProductIndex extends React.Component {
     return(
       <div className="ProductIndex">
         <h1>Products</h1>
-        <Link to='/products/new'>New Product + </Link>
-        {this.state.products.map((product) => {
-          return (
-            <div key={product._id}>
-              <img src={product.image} alt={product.image} style={{ width: '300px' }} /> <br />
-              Name: {product.name} <br/>
-              Price: ${product.price} <br/>
-              Description: {product.description} <br/>
-              Category: {product.category} <br/>
-              <Link to={`/products/${product._id}/edit`}>Edit</Link>
-              <button onClick={() => { this.deleteProduct(product)}}>Delete</button>
-              <hr/>
-            </div>
-          )
-        })}
+        <Link className="button is-success new-product" to='/products/new'>New Product + </Link>
+        <table className="table is-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Image</th>
+              <th>Price</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.state.products.map((product, index) => {
+              return (
+                <tr key={product._id}>
+                  <td>{index + 1}</td>
+                  <td>{product.name}</td>
+                  <td><img src={product.image} alt={product.image} style={{ width: '100px' }} /></td>
+                  <td>${product.price}</td>
+                  <td>{product.description}</td>
+                  <td>{product.category}</td>
+                  <td>
+                    <Link className="button is-warning" to={`/products/${product._id}/edit`}>Edit</Link>
+                    <button className="button is-danger" onClick={() => { this.deleteProduct(product)}}>Delete</button>
+                  </td>
+                </tr>
+              )
+            })}
+          </tbody>
+        </table>
       </div>
     )
   }

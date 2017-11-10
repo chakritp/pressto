@@ -1,33 +1,17 @@
-.App {
-  text-align: center;
-}
+$primaryColor: #8F754F;
+$secondaryColor: #F5F0F6;
+$darkPrimaryColor: #51422C;
 
-.NavBar {
-  ul, li {
-    list-style: none;
-  }
-
-  li {
-    display: inline;
-    margin: 5px;
-  }
-}
-
-.Order {
-  .order-box {
-    border: 1px solid black;
-    width: 30%;
-    margin: 0 auto;
-  }
-}
-
-.currentOrder {
-  & > div {
-    border: 1px solid black;
-    width: 30%;
-    display: inline-block;
-  }
-  ul {
-    list-style: none;
-  }
-}
+@import 'app';
+@import 'navbar';
+@import 'home';
+@import 'menu';
+@import 'cart';
+@import 'order';
+@import 'current-order';
+@import 'order-confirmation';
+@import 'product-index';
+@import 'product-new';
+@import 'product-edit';
+@import 'footer';
+@import 'login'

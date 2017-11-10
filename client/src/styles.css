@@ -1,5 +1,33 @@
-.App {
-  text-align: center; }
+.App .buffer-space {
+  height: 65px; }
+.App .navbar {
+  background: #8F754F; }
+  .App .navbar a {
+    color: #F5F0F6; }
+  .App .navbar .button.navbar-burger {
+    margin-top: 5px;
+    margin-right: 20px; }
+  .App .navbar .navbar-end {
+    margin-right: 50px; }
+  .App .navbar .navbar-item:hover {
+    transition-duration: 0.3s;
+    background: #F5F0F6;
+    color: #8F754F; }
+  .App .navbar .navbar-menu.is-active {
+    z-index: 9999;
+    position: absolute;
+    width: 100%; }
+    .App .navbar .navbar-menu.is-active .navbar-item {
+      color: #8F754F; }
+  .App .navbar img {
+    margin-left: 30px; }
+@media (max-width: 450px) {
+  .App .navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 99999; }
+  .App img {
+    margin-left: 10px; } }
 
 .NavBar ul, .NavBar li {
   list-style: none; }
@@ -7,16 +35,141 @@
   display: inline;
   margin: 5px; }
 
-.Order .order-box {
-  border: 1px solid black;
-  width: 30%;
-  margin: 0 auto; }
+.Home {
+  text-align: center; }
+  .Home .banner {
+    background: url("./images/coffee-banner.jpg");
+    background-size: cover;
+    height: 400px;
+    width: 100%;
+    position: relative; }
+    .Home .banner .heading {
+      position: absolute;
+      width: 50%;
+      top: 175px;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      background: rgba(245, 240, 246, 0.5);
+      padding: 20px;
+      border-radius: 20px; }
+      .Home .banner .heading h1 {
+        color: black;
+        font-size: 3em !important; }
+      .Home .banner .heading h2 {
+        font-size: 2.1em !important; }
+  .Home .card {
+    margin-top: 20px; }
+    .Home .card p.title {
+      text-align: center; }
+    .Home .card .fa-stack-2x {
+      color: #8F754F; }
+    .Home .card .fa-stack-1x {
+      color: #F5F0F6; }
+  @media (max-width: 450px) {
+    .Home .heading {
+      top: 115px !important;
+      width: 80% !important; } }
 
-.currentOrder > div {
-  border: 1px solid black;
-  width: 30%;
-  display: inline-block; }
-.currentOrder ul {
-  list-style: none; }
+.Menu, .Cart {
+  text-align: center; }
+  .Menu input.quantity, .Cart input.quantity {
+    width: 10%; }
+  .Menu button, .Cart button {
+    margin-top: 10px; }
+
+.Cart button.clear-cart {
+  margin-bottom: 20px; }
+.Cart .name-field, .Cart .telephone-field {
+  width: 80%;
+  margin: 10px 0; }
+.Cart .telephone-field {
+  margin-bottom: 30px; }
+
+.Order {
+  text-align: center; }
+
+.CurrentOrder {
+  text-align: center; }
+  .CurrentOrder .columns {
+    margin-top: 20px; }
+  .CurrentOrder .column {
+    min-height: 500px; }
+    .CurrentOrder .column h2 {
+      text-decoration: underline; }
+    .CurrentOrder .column .order {
+      border: 1px solid black;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px; }
+      .CurrentOrder .column .order b {
+        font-size: 1.5em; }
+      .CurrentOrder .column .order ul {
+        list-style: none;
+        width: 80%; }
+    .CurrentOrder .column.pending .order {
+      background: #fedc62; }
+    .CurrentOrder .column.in-progress .order {
+      color: white;
+      background: #2b9eeb; }
+    .CurrentOrder .column.done .order {
+      color: white;
+      background: #31cf65; }
+  .CurrentOrder .column.pending, .CurrentOrder .column.in-progress {
+    border-right: 1px solid black; }
+  @media (max-width: 450px) {
+    .CurrentOrder .column.pending, .CurrentOrder .column.in-progress {
+      border-right: none;
+      border-bottom: 1px solid black; }
+    .CurrentOrder .order {
+      width: 90%;
+      margin: 0 auto; } }
+
+.OrderConfirmation {
+  text-align: center; }
+  .OrderConfirmation .fa {
+    color: #31cf65; }
+  .OrderConfirmation .order-number {
+    font-size: 1.5em; }
+
+.ProductIndex h1 {
+  text-align: center; }
+.ProductIndex .button.new-product {
+  margin-bottom: 30px; }
+
+.ProductNew {
+  text-align: center; }
+  .ProductNew form {
+    width: 50%;
+    margin: 0 auto; }
+
+.ProductEdit {
+  text-align: center; }
+  .ProductEdit form {
+    width: 50%;
+    margin: 0 auto; }
+
+.Footer {
+  margin-top: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: #51422C;
+  color: #F5F0F6; }
+  .Footer strong {
+    color: #d39e48;
+    font-size: 1.5em;
+    font-weight: bold; }
+  .Footer a {
+    color: white;
+    font-weight: bold; }
+    .Footer a:hover {
+      color: #d39e48; }
+
+.LogIn {
+  text-align: center; }
+  .LogIn form {
+    width: 50%;
+    margin: 0 auto; }
 
 /*# sourceMappingURL=styles.css.map */

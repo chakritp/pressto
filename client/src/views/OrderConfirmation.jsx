@@ -22,7 +22,7 @@ class OrderConfirmation extends React.Component {
   render() {
     return (
       <div className="OrderConfirmation">
-        <h1>Order Confirmation</h1>
+        <h1>Order Confirmation <i className="fa fa-check-circle" aria-hidden="true"></i></h1>
         {!this.state.order
         ? (
             <div>Loading...</div>
@@ -30,7 +30,7 @@ class OrderConfirmation extends React.Component {
         : (
             <div>
               <p>You have successfully placed your order, {this.state.order.customer.name}</p>
-              <p>Your order number is: #{this.state.order.id}</p>
+              <p><b className="order-number">Your order number is: #{this.state.order.id}</b></p>
               <hr/>
               <h2>Order Details</h2>
               {this.state.order.items.map(item => {

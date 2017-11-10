@@ -15,7 +15,6 @@ class CurrentOrder extends React.Component {
   componentDidMount() {
     this.socketio = io()
 
-
     this.socketio.emit('connect', (data) => {
       console.log('Connected to server')
     })
@@ -59,7 +58,6 @@ class CurrentOrder extends React.Component {
   
   componentWillUnmount() {
     // close socket connection
-    console.log('unmounting')
     this.socketio.disconnect()
   }
 
@@ -81,58 +79,60 @@ class CurrentOrder extends React.Component {
   
   render() {
     return (
-      <div className="currentOrder">
+      <div className="CurrentOrder">
         <h1>Pressto Orders</h1>
-        <div className="pending">
-          <h2>Pending</h2>
+        <div className="columns">
+          <div className="pending column">
+            <h2>Pending</h2>
 
-          {this.state.pendingOrders.map((order) => {
-            return (
-              <div key={order._id}>
-                <b>#{order.id} - {order.customer.name}</b>
-                <ul className="orders">
-                  {order.items.map((item) => {
-                    return <li key={item._id}>{item.quantity} {item.product.name}</li>
-                  })}
-                </ul>
-                {this.props.currentUser ? <button onClick={() => { this.onMoveToInProgress(order._id) }}>Move to In Progress</button> : null}
-              </div>
-            )
-          })}
-        </div>
-        <div className="in-progress">
-          <h2>In Progress</h2>
-          
-          {this.state.inProgressOrders.map((order) => {
-            return (
-              <div key={order._id}>
-                <b>#{order.id}- {order.customer.name}</b>
-                <ul className="orders">
-                  {order.items.map((item) => {
-                    return <li key={item._id}>{item.quantity} {item.product.name}</li>
-                  })}
-                </ul>
-                {this.props.currentUser ? <button onClick={() => { this.onMoveToDone(order._id) }}>Move to Done</button> : null}
-              </div>
-            )
-          })}
-        </div>
-        <div className="done">
-          <h2>Ready For Pickup</h2>
+            {this.state.pendingOrders.map((order) => {
+              return (
+                <div className="order" key={order._id}>
+                  <b>#{order.id} - {order.customer.name}</b>
+                  <ul className="orders">
+                    {order.items.map((item) => {
+                      return <li key={item._id}>{item.quantity} {item.product.name}</li>
+                    })}
+                  </ul>
+                  {this.props.currentUser ? <button className='button is-info' onClick={() => { this.onMoveToInProgress(order._id) }}>Move to In Progress</button> : null}
+                </div>
+              )
+            })}
+          </div>
+          <div className="in-progress column">
+            <h2>In Progress</h2>
+            
+            {this.state.inProgressOrders.map((order) => {
+              return (
+                <div className="order" key={order._id}>
+                  <b>#{order.id}- {order.customer.name}</b>
+                  <ul className="orders">
+                    {order.items.map((item) => {
+                      return <li key={item._id}>{item.quantity} {item.product.name}</li>
+                    })}
+                  </ul>
+                  {this.props.currentUser ? <button className='button is-success' onClick={() => { this.onMoveToDone(order._id) }}>Move to Done</button> : null}
+                </div>
+              )
+            })}
+          </div>
+          <div className="done column">
+            <h2>Ready For Pickup</h2>
 
-          {this.state.doneOrders.map((order) => {
-            return (
-              <div key={order._id}>
-                <b>#{order.id}- {order.customer.name}</b>
-                <ul className="orders">
-                  {order.items.map((item) => {
-                    return <li key={item._id}>{item.quantity} {item.product.name}</li>
-                  })}
-                </ul>
-                {this.props.currentUser ? <button onClick={() => { this.onMoveToArchive(order._id) }}>Archive</button> : null}
-              </div>
-            )
-          })}
+            {this.state.doneOrders.map((order) => {
+              return (
+                <div className="order" key={order._id}>
+                  <b>#{order.id}- {order.customer.name}</b>
+                  <ul className="orders">
+                    {order.items.map((item) => {
+                      return <li key={item._id}>{item.quantity} {item.product.name}</li>
+                    })}
+                  </ul>
+                  {this.props.currentUser ? <button className='button is-warning' onClick={() => { this.onMoveToArchive(order._id) }}>Archive</button> : null}
+                </div>
+              )
+            })}
+          </div>
         </div>
       </div>
     )
