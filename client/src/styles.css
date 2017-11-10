@@ -87,10 +87,8 @@
 .Cart .telephone-field {
   margin-bottom: 30px; }
 
-.Order .order-box {
-  border: 1px solid black;
-  width: 30%;
-  margin: 0 auto; }
+.Order {
+  text-align: center; }
 
 .CurrentOrder {
   text-align: center; }
@@ -134,5 +132,39 @@
     color: #31cf65; }
   .OrderConfirmation .order-number {
     font-size: 1.5em; }
+
+.ProductIndex h1 {
+  text-align: center; }
+.ProductIndex .button.new-product {
+  margin-bottom: 30px; }
+
+.ProductNew {
+  text-align: center; }
+  .ProductNew form {
+    width: 50%;
+    margin: 0 auto; }
+
+.ProductEdit {
+  text-align: center; }
+  .ProductEdit form {
+    width: 50%;
+    margin: 0 auto; }
+
+.Footer {
+  margin-top: 50px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  background: #51422C;
+  color: #F5F0F6; }
+  .Footer strong {
+    color: #d39e48;
+    font-size: 1.5em;
+    font-weight: bold; }
+  .Footer a {
+    color: white;
+    font-weight: bold;
+    text-decoration: underline; }
+    .Footer a:hover {
+      color: #d39e48; }
 
 /*# sourceMappingURL=styles.css.map */

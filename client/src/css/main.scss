@@ -1,5 +1,6 @@
 $primaryColor: #8F754F;
 $secondaryColor: #F5F0F6;
+$darkPrimaryColor: #51422C;
 
 @import 'app';
 @import 'navbar';
@@ -8,4 +9,8 @@ $secondaryColor: #F5F0F6;
 @import 'cart';
 @import 'order';
 @import 'current-order';
-@import 'order-confirmation'
+@import 'order-confirmation';
+@import 'product-index';
+@import 'product-new';
+@import 'product-edit';
+@import 'footer';

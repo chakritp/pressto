@@ -5,6 +5,7 @@ import clientAuth from './clientAuth.js'
 import 'bulma/css/bulma.css'
 
 import Navbar from './Navbar'
+import Footer from './Footer'
 import Home from './views/Home'
 import Menu from './views/Menu'
 import Cart from './views/Cart'
@@ -129,6 +130,7 @@ class App extends Component {
             return <LogOut onLogOut={this.logout.bind(this)} />
           }} />
         </Switch>
+        <Footer />
       </div>
     );
   }

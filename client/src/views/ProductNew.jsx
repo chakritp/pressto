@@ -32,17 +32,42 @@ class ProductNew extends React.Component {
       <div className="ProductNew">
         <h1>New Product</h1>
         <form onChange={this.onFormChange.bind(this)} onSubmit={this.onFormSubmit.bind(this)}>
-          <input type="text" name="name" placeholder="Name" /> <br />
-          <input type="number" step="0.01" name="price" placeholder="Price" /> <br />
-          <input type="text" name="category" placeholder="Category" /> <br />
-          <textarea placeholder="Description" name="description" /> <br />
-          <input type="text" name="image" placeholder="Image URL" /> <br />
+          <div className="field">
+            <label className="label">Name</label>
+            <div className="control">
+              <input className="input" type="text" name="name" placeholder="Name" />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Price</label>
+            <div className="control">
+              <input className="input" type="number" step="0.01" name="price" placeholder="Price" /> <br />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Category</label>
+            <div className="control">
+              <input className="input"type="text" name="category" placeholder="Category" /> <br />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Description</label>
+            <div className="control">
+              <textarea className="textarea" placeholder="Description" name="description" /> <br />
+            </div>
+          </div>
+          <div className="field">
+            <label className="label">Image URL</label>
+            <div className="control">
+              <input className="input" type="text" name="image" placeholder="Image URL" /> <br />
+            </div>
+          </div>
           {this.state.product && this.state.product.image
           ? (<div>
               <img src={this.state.product.image} alt={this.state.product.image} style={{ width: '300px' }} /> <br />
             </div>)
           : (null)}
-          <button>Create Product</button>
+          <button className="button is-success">Create Product</button>
         </form>
       </div>
     )
