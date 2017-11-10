@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import './styles.css'
 import clientAuth from './clientAuth.js'
 import 'bulma/css/bulma.css'
+import AlertContainer from 'react-alert'
 
 import Navbar from './Navbar'
 import Footer from './Footer'
@@ -19,6 +20,28 @@ import LogIn from './views/LogIn'
 import LogOut from './views/LogOut'
 
 class App extends Component {
+  alertOptions = {
+    offset: 14,
+    position: 'top left',
+    theme: 'dark',
+    time: 5000,
+    transition: 'scale'
+  }
+  
+  showSuccess(text) {
+    this.msg.show(text, {
+      time: 2000,
+      type: 'success'
+    })
+  }
+
+  showError(text) {
+    this.msg.show(text, {
+      time: 2000,
+      type: 'error'
+    })
+  }
+
   state = {
     shoppingCart: [], // { product, qty }
     currentUser: null
@@ -48,35 +71,43 @@ class App extends Component {
   }
   
   updateCart(item, quantity=1) {
-    var itemsArray = JSON.parse(localStorage.getItem('itemsArray'))
-    
-    if(!itemsArray){ // items hasn't been initialized yet
-      var itemsArray = []
-      itemsArray.push({item, quantity})
-    }
-    else { // in the case that the array isn't empty
-      var itemExists = false
-      for(var index in itemsArray) {
-        let currentItem = itemsArray[index].item
+    if(quantity > 0) {
+      var itemsArray = JSON.parse(localStorage.getItem('itemsArray'))
+      
+      if(!itemsArray){ // items hasn't been initialized yet
+        var itemsArray = []
+        itemsArray.push({item, quantity})
+      }
+      else { // in the case that the array isn't empty
+        var itemExists = false
+        for(var index in itemsArray) {
+          let currentItem = itemsArray[index].item
 
-        if(currentItem.name == item.name) { // if the item exists in local storage, increment the quantity of it
-          itemsArray[index].quantity = Number(itemsArray[index].quantity) + Number(quantity)
-          itemExists = true
+          if(currentItem.name == item.name) { // if the item exists in local storage, increment the quantity of it
+            itemsArray[index].quantity = Number(itemsArray[index].quantity) + Number(quantity)
+            itemExists = true
+          }
         }
+
+        //if item doesn't exist add the item to the array
+        if(!itemExists) itemsArray.push({item, quantity})
       }
 
-      //if item doesn't exist add the item to the array
-      if(!itemExists) itemsArray.push({item, quantity})
-    }
-    
-    localStorage.setItem('itemsArray', JSON.stringify(itemsArray))
+      this.showSuccess(`Added ${quantity} ${item.name} to cart`)
+      
+      localStorage.setItem('itemsArray', JSON.stringify(itemsArray))
 
-    this.setState({
-      shoppingCart: [
-        ...this.state.shoppingCart, 
-        { item, quantity }
-      ]
-    })
+      this.setState({
+        shoppingCart: [
+          ...this.state.shoppingCart, 
+          { item, quantity }
+        ]
+      })
+    } else {
+      this.showError('Quantity must be at least 1')
+      return false
+    }
+
   }
 
   render() {
@@ -85,12 +116,15 @@ class App extends Component {
       <div className="App content container">
         <Navbar currentUser={currentUser} />
         <div className="buffer-space"></div>
+        <AlertContainer ref={a => this.msg = a} {...this.alertOptions} />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/menu" render={(props) => {
             return <Menu {...props} onUpdateCart={this.updateCart.bind(this)}/>
           }} />
-          <Route path="/cart" component={Cart} />
+          <Route path="/cart" render={(props) => {
+            return <Cart {...props} showError={this.showError.bind(this)}/>
+          }} />
           <Route path="/order-confirmation/:id" component={OrderConfirmation} />
           <Route path="/current-orders" render={(props) => {
             return <CurrentOrder {...props} currentUser={currentUser} />

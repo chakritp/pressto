@@ -95,33 +95,37 @@ class Cart extends React.Component {
 
   onQuantityChange(evt, id) {
     // prevent user from inputting quantity less than 1
-    if(evt.target.value <= 0) return (evt.target.value = 1)
-
-    //set value of cart in localStorage
-    var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
-    for (var index in itemsArray) {
-      if (itemsArray[index].item._id === id) { // if the item matches the id that we want to remove
-        //change quantity of that item
-        itemsArray[index].quantity = evt.target.value
+    if(evt.target.value > 0) {
+      //set value of cart in localStorage
+      var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
+      for (var index in itemsArray) {
+        if (itemsArray[index].item._id === id) { // if the item matches the id that we want to remove
+          //change quantity of that item
+          itemsArray[index].quantity = evt.target.value
+        }
       }
+  
+      // save to local storage
+      localStorage.setItem('itemsArray', JSON.stringify(itemsArray))
+  
+      var subtotal = this.calculateSubtotal(itemsArray)
+      var tax = this.calculateTax(subtotal)
+      var total = this.calculateTotal(subtotal, tax)
+      var description = this.formatDescription(itemsArray)
+  
+      //remove item from state
+      this.setState({
+        shoppingCart: itemsArray,
+        subtotal: subtotal,
+        tax: tax,
+        total: total,
+        description: description
+      })
     }
 
-    // save to local storage
-    localStorage.setItem('itemsArray', JSON.stringify(itemsArray))
-
-    var subtotal = this.calculateSubtotal(itemsArray)
-    var tax = this.calculateTax(subtotal)
-    var total = this.calculateTotal(subtotal, tax)
-    var description = this.formatDescription(itemsArray)
-
-    //remove item from state
-    this.setState({
-      shoppingCart: itemsArray,
-      subtotal: subtotal,
-      tax: tax,
-      total: total,
-      description: description
-    })
+    else {
+      this.props.showError("Must specify at least 1 quantity for this item")
+    }
   }
 
   onFieldChange(evt) {
