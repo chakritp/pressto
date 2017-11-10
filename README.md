@@ -1,6 +1,6 @@
 # Pressto
 
-Pressto allows you to order drinks and food all from the convienience of your phone or tablet. Pressto takes credit and debit card payments through the Stripe API, a secure payment gateway. As an administrator, you are able to keep track of orders and update the status of orders, allowing customers to see the status of the orders realtime with Socket.io
+Pressto allows you to order drinks and food all from the convienience of your desktop, phone or tablet. Pressto takes credit and debit card payments through the Stripe API, a secure payment gateway. As an administrator, you are able to keep track of orders and update the status of orders, allowing customers to see the status of the orders realtime with Socket.io
 
 View the app [here](https://ga-pressto.herokuapp.com/)
 
@@ -21,6 +21,7 @@ The general technologies for this project include:
 - Mongo
 - Git/Github
 - Heroku
+- Bulma
 
 The technologies and libraries used on the **server** side include:
 
@@ -68,6 +69,7 @@ The main user stories for the MVP are as follows:
 - As a signed in admin, I want to be able to view a list of my past orders
 
 # Biggest Challenges
+- Shopping Cart
 - Stripe API
 - Socket IO
 
