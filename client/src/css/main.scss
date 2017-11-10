@@ -139,12 +139,27 @@ $secondaryColor: #F5F0F6;
   }
 }
 
-.Menu {
+.Menu, .Cart {
   text-align: center;
-  input {
+  input.quantity {
     width: 10%;
   }
   button {
     margin-top: 10px;
+  }
+}
+
+.Cart {
+  button.clear-cart {
+    margin-bottom: 20px;
+  }
+
+  .name-field, .telephone-field {
+    width: 80%;
+    margin: 10px 0;
+  }
+
+  .telephone-field {
+    margin-bottom: 30px;
   }
 }

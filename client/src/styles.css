@@ -83,11 +83,19 @@
 .currentOrder ul {
   list-style: none; }
 
-.Menu {
+.Menu, .Cart {
   text-align: center; }
-  .Menu input {
+  .Menu input.quantity, .Cart input.quantity {
     width: 10%; }
-  .Menu button {
+  .Menu button, .Cart button {
     margin-top: 10px; }
+
+.Cart button.clear-cart {
+  margin-bottom: 20px; }
+.Cart .name-field, .Cart .telephone-field {
+  width: 80%;
+  margin: 10px 0; }
+.Cart .telephone-field {
+  margin-bottom: 30px; }
 
 /*# sourceMappingURL=styles.css.map */
