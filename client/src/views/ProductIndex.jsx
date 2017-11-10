@@ -53,6 +53,7 @@ class ProductIndex extends React.Component {
         {this.state.products.map((product) => {
           return (
             <div key={product._id}>
+              <img src={product.image} alt={product.image} style={{ width: '300px' }} /> <br />
               Name: {product.name} <br/>
               Price: ${product.price} <br/>
               Description: {product.description} <br/>

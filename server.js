@@ -81,7 +81,7 @@ io.on('connection', (client) => {
       if (err) return console.log(err)
       Order.find({}).populate('items.product').exec((err, orders) => {
         if (err) return console.log(err)
-        client.emit('orders', orders)
+        io.emit('orders', orders)
       })
     })
   })
@@ -92,11 +92,12 @@ io.on('connection', (client) => {
       if (err) return console.log(err)
       Order.find({}).populate('items.product').exec((err, orders) => {
         if (err) return console.log(err)
-        client.emit('orders', orders)
+        io.emit('orders', orders)
       })
     })
   })
 })
+
 
 // io.listen(SOCKET_PORT)
 

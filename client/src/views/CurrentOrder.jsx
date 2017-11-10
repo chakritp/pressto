@@ -1,9 +1,9 @@
 import React from 'react'
-import openSocket from 'socket.io-client'
+import io from 'socket.io-client'
 
 // for url may have to use conditional domain (i.e. localhost for dev, or url for production)
-const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:3000'
-const socket = openSocket(socketUrl)
+// const socketUrl = process.env.REACT_APP_SOCKET_URL || 'http://localhost:3000'
+// const socket = openSocket(socketUrl)
 
 class CurrentOrder extends React.Component {
   state = {
@@ -11,22 +11,24 @@ class CurrentOrder extends React.Component {
     inProgressOrders: [],
     doneOrders: []
   }
-
+  
   componentDidMount() {
-    socket.on('connect', () => {
+    this.socketio = io()
+
+
+    this.socketio.emit('connect', (data) => {
       console.log('Connected to server')
     })
 
     // socket listener
-    socket.on('new-order', (data) => {
+    this.socketio.on('new-order', (data) => {
       console.log('order', data)
-      console.log()
       this.setState({
         pendingOrders: [...this.state.pendingOrders, data]
       })
     })
 
-    socket.on('orders', (data) => {
+    this.socketio.on('orders', (data) => {
       console.log(data)
       var pendingOrders = []
       var inProgressOrders = []
@@ -54,24 +56,27 @@ class CurrentOrder extends React.Component {
       })
     })
   }
+  
+  componentWillUnmount() {
+    // close socket connection
+    console.log('unmounting')
+    this.socketio.disconnect()
+  }
 
   // Handlers for button clicks
   onMoveToInProgress(id) {
     //emit socket event to update status of order to inprogress (send id)
-    socket.emit('move-to-inprogress', id)
-    // update state
+    this.socketio.emit('move-to-inprogress', id)
   }
 
   onMoveToDone(id) {
     //emit socket event to update status of order to done (send id)
-    socket.emit('move-to-done', id)
-    // update state
+    this.socketio.emit('move-to-done', id)
   }
 
   onMoveToArchive(id) {
     //emit socket event to update status of order to archive (send id)
-    socket.emit('move-to-archive', id)
-    // update state
+    this.socketio.emit('move-to-archive', id)
   }
   
   render() {
