@@ -33,9 +33,21 @@ class LogIn extends React.Component {
       <div className="LogIn">
         <h1>Log In</h1>
         <form onChange={this.onInputChange.bind(this)} onSubmit={this.onFormSubmit.bind(this)}>
-          <input type="text" placeholder="Email" name="email" value={email}/>
-          <input type="password" placeholder="Password" name="password" value={password}/>
-          <button>Log In</button>
+          <div className="field">
+            <label className="label">Email</label>
+            <div className="control">
+              <input className="input" type="text" placeholder="Email" name="email" value={email} />
+            </div>
+          </div>
+
+          <div className="field">
+            <label className="label">Password</label>
+            <div className="control">
+              <input className="input" type="password" placeholder="Password" name="password" value={password} />
+            </div>
+          </div>
+
+          <button className="button is-success">Log In</button>
         </form>
       </div>
     )
