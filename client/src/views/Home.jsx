@@ -6,7 +6,7 @@ const Home = (props) => {
       <div className="banner">
         <div className="heading">
           <h1>Welcome To Pressto</h1>
-          <h2>"Ordering at a cafe made easy"</h2>
+          <h2>"Ordering made easy"</h2>
         </div>
       </div>
 
