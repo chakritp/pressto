@@ -128,4 +128,11 @@
       width: 90%;
       margin: 0 auto; } }
 
+.OrderConfirmation {
+  text-align: center; }
+  .OrderConfirmation .fa {
+    color: #31cf65; }
+  .OrderConfirmation .order-number {
+    font-size: 1.5em; }
+
 /*# sourceMappingURL=styles.css.map */
