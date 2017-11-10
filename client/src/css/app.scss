@@ -1,0 +1,55 @@
+.App {
+  .buffer-space {
+    height: 65px;
+  }
+
+  .navbar {
+    background: $primaryColor;
+    a {
+      color: $secondaryColor;
+    }
+
+    .button.navbar-burger {
+      margin-top: 5px;
+      margin-right: 20px;
+    }
+
+
+    .navbar-end {
+      margin-right: 50px;
+    }
+
+    .navbar-item:hover {
+      transition-duration: 0.3s;
+      background: $secondaryColor;
+      color: $primaryColor;
+    }
+
+    .navbar-menu.is-active {
+      z-index: 9999;
+      position: absolute;
+      width: 100%;
+
+      .navbar-item {
+        color: $primaryColor;
+      }
+    }
+
+    img {
+      margin-left: 30px;
+    }
+
+  }
+  
+  @media (max-width: 450px) {
+    .navbar {
+      position: fixed;
+      width: 100%;
+      z-index: 99999;
+    }
+    
+    img {
+      margin-left: 10px;
+    }
+  }
+}
