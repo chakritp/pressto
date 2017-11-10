@@ -2,7 +2,14 @@ $primaryColor: #8F754F;
 $secondaryColor: #F5F0F6;
 
 .App {
+  .buffer-space {
+    height: 65px;
+  }
+
   .navbar {
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
     background: $primaryColor;
     a {
       color: $secondaryColor;
@@ -10,7 +17,7 @@ $secondaryColor: #F5F0F6;
 
     .button.navbar-burger {
       margin-top: 5px;
-      margin-right: 5px;
+      margin-right: 20px;
     }
 
 
@@ -94,7 +101,7 @@ $secondaryColor: #F5F0F6;
     }
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 450px) {
     .heading {
       top: 115px !important;
       width: 80% !important;
@@ -129,5 +136,15 @@ $secondaryColor: #F5F0F6;
   }
   ul {
     list-style: none;
+  }
+}
+
+.Menu {
+  text-align: center;
+  input {
+    width: 10%;
+  }
+  button {
+    margin-top: 10px;
   }
 }

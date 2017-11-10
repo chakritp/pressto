@@ -1,10 +1,15 @@
+.App .buffer-space {
+  height: 65px; }
 .App .navbar {
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
   background: #8F754F; }
   .App .navbar a {
     color: #F5F0F6; }
   .App .navbar .button.navbar-burger {
     margin-top: 5px;
-    margin-right: 5px; }
+    margin-right: 20px; }
   .App .navbar .navbar-end {
     margin-right: 50px; }
   .App .navbar .navbar-item:hover {
@@ -55,7 +60,7 @@
       color: #8F754F; }
     .Home .card .fa-stack-1x {
       color: #F5F0F6; }
-  @media (max-width: 400px) {
+  @media (max-width: 450px) {
     .Home .heading {
       top: 115px !important;
       width: 80% !important; } }
@@ -77,5 +82,12 @@
   display: inline-block; }
 .currentOrder ul {
   list-style: none; }
+
+.Menu {
+  text-align: center; }
+  .Menu input {
+    width: 10%; }
+  .Menu button {
+    margin-top: 10px; }
 
 /*# sourceMappingURL=styles.css.map */
