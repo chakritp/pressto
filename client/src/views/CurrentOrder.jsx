@@ -15,7 +15,6 @@ class CurrentOrder extends React.Component {
   componentDidMount() {
     this.socketio = io()
 
-
     this.socketio.emit('connect', (data) => {
       console.log('Connected to server')
     })
@@ -59,7 +58,6 @@ class CurrentOrder extends React.Component {
   
   componentWillUnmount() {
     // close socket connection
-    console.log('unmounting')
     this.socketio.disconnect()
   }
 

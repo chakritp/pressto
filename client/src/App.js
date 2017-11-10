@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import './styles.css'
 import clientAuth from './clientAuth.js'
+import 'bulma/css/bulma.css'
 
 import Navbar from './Navbar'
 import Home from './views/Home'
