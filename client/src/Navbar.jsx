@@ -2,36 +2,55 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import logo from './images/logo.png'
 
-const NavBar = (props) => {
-  return (
-    <nav className="NavBar navbar">
-      <div className="navbar-brand">
-        <Link to="/">
-          <img src={logo} alt="Logo" width="112" height="28" />
-        </Link>
-        <button className="button navbar-burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-      </div>
+class NavBar extends React.Component {
+  state = {
+    showNavbar: false
+  }
 
-      <div className="navbar-menu">
-        <div className="navbar-end">
-          <Link className="navbar-item" to="/current-orders">View Current Orders</Link>
+  toggleNavbar() {
+    this.setState({
+      showNavbar: !this.state.showNavbar
+    })
+  }
 
-          {/* customer routes only */}
-          {!props.currentUser ? <Link className="navbar-item" to="/menu">Menu</Link> : null }
-          {!props.currentUser ? <Link className="navbar-item" to="/menu">View Cart</Link> : null }
+  hideNavbar() {
+    this.setState({
+      showNavbar: false
+    })
+  }
 
-          {/* admin protected routes */}
-          {props.currentUser ? <Link className="navbar-item" to="/order-history">View Order History</Link> : null}
-          {props.currentUser ? <Link className="navbar-item" to="/products">Manage Products</Link> : null}
-          {props.currentUser ? <Link className="navbar-item" to="/logout">Log Out</Link> : null}
+  render() {
+    return (
+      <nav className="NavBar navbar">
+        <div className="navbar-brand">
+          <Link to="/" onClick={this.hideNavbar.bind(this)}>
+            <img src={logo} alt="Logo" width="112" height="28" />
+          </Link>
+
+          <button className="button navbar-burger" onClick={this.toggleNavbar.bind(this)}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
-      </div>
-    </nav>
-  )
+
+        <div className={`navbar-menu ${this.state.showNavbar ? 'is-active' : ''}`}>
+          <div className="navbar-end">
+            <Link className="navbar-item" to="/current-orders" onClick={this.hideNavbar.bind(this)}>View Current Orders</Link>
+
+            {/* customer routes only */}
+            {!this.props.currentUser ? <Link className="navbar-item" to="/menu" onClick={this.hideNavbar.bind(this)}>Menu</Link> : null }
+            {!this.props.currentUser ? <Link className="navbar-item" to="/cart" onClick={this.hideNavbar.bind(this)}>View Cart</Link> : null }
+
+            {/* admin protected routes */}
+            {this.props.currentUser ? <Link className="navbar-item" to="/order-history" onClick={this.hideNavbar.bind(this)}>View Order History</Link> : null}
+            {this.props.currentUser ? <Link className="navbar-item" to="/products" onClick={this.hideNavbar.bind(this)}>Manage Products</Link> : null}
+            {this.props.currentUser ? <Link className="navbar-item" to="/logout" onClick={this.hideNavbar.bind(this)}>Log Out</Link> : null}
+          </div>
+        </div>
+      </nav>
+    )
+  }
 }
 
 export default NavBar

@@ -1,12 +1,103 @@
+$primaryColor: #8F754F;
+$secondaryColor: #F5F0F6;
+
 .App {
   .navbar {
-    background: #8F754F;
+    background: $primaryColor;
     a {
-      color: #F5F0F6;
+      color: $secondaryColor;
+    }
+
+    .button.navbar-burger {
+      margin-top: 5px;
+      margin-right: 5px;
+    }
+
+
+    .navbar-end {
+      margin-right: 50px;
+    }
+
+    .navbar-item:hover {
+      transition-duration: 0.3s;
+      background: $secondaryColor;
+      color: $primaryColor;
+    }
+
+    .navbar-menu.is-active {
+      z-index: 9999;
+      position: absolute;
+      width: 100%;
+
+      .navbar-item {
+        color: $primaryColor;
+      }
     }
 
     img {
       margin-left: 30px;
+    }
+
+    @media (max-width: 400px) {
+      img {
+        margin-left: 10px;
+      }
+    }
+  }
+}
+
+.Home {
+  text-align: center;
+
+  .banner {
+    background: url('./images/coffee-banner.jpg');
+    background-size: cover;
+    height: 400px;
+    width: 100%;
+    position: relative;
+    
+    .heading{
+      position: absolute;
+      width: 50%;
+      top: 175px;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      background: rgba(245, 240, 246, 0.5);
+      padding: 20px;
+      border-radius: 20px;
+      
+      h1 {
+        color: black;
+        font-size: 3em !important;
+      }
+
+      h2 {
+        font-size: 2.1em !important;
+      }
+    }
+  }
+
+  .card {
+    margin-top: 20px;
+    p.title {
+      text-align: center;
+    }
+
+    .fa-stack-2x {
+      color: $primaryColor;
+    }
+
+    .fa-stack-1x {
+      color: $secondaryColor;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .heading {
+      top: 115px !important;
+      width: 80% !important;
     }
   }
 }

@@ -2,8 +2,63 @@
   background: #8F754F; }
   .App .navbar a {
     color: #F5F0F6; }
+  .App .navbar .button.navbar-burger {
+    margin-top: 5px;
+    margin-right: 5px; }
+  .App .navbar .navbar-end {
+    margin-right: 50px; }
+  .App .navbar .navbar-item:hover {
+    transition-duration: 0.3s;
+    background: #F5F0F6;
+    color: #8F754F; }
+  .App .navbar .navbar-menu.is-active {
+    z-index: 9999;
+    position: absolute;
+    width: 100%; }
+    .App .navbar .navbar-menu.is-active .navbar-item {
+      color: #8F754F; }
   .App .navbar img {
     margin-left: 30px; }
+  @media (max-width: 400px) {
+    .App .navbar img {
+      margin-left: 10px; } }
+
+.Home {
+  text-align: center; }
+  .Home .banner {
+    background: url("./images/coffee-banner.jpg");
+    background-size: cover;
+    height: 400px;
+    width: 100%;
+    position: relative; }
+    .Home .banner .heading {
+      position: absolute;
+      width: 50%;
+      top: 175px;
+      left: 0;
+      right: 0;
+      margin-right: auto;
+      margin-left: auto;
+      background: rgba(245, 240, 246, 0.5);
+      padding: 20px;
+      border-radius: 20px; }
+      .Home .banner .heading h1 {
+        color: black;
+        font-size: 3em !important; }
+      .Home .banner .heading h2 {
+        font-size: 2.1em !important; }
+  .Home .card {
+    margin-top: 20px; }
+    .Home .card p.title {
+      text-align: center; }
+    .Home .card .fa-stack-2x {
+      color: #8F754F; }
+    .Home .card .fa-stack-1x {
+      color: #F5F0F6; }
+  @media (max-width: 400px) {
+    .Home .heading {
+      top: 115px !important;
+      width: 80% !important; } }
 
 .NavBar ul, .NavBar li {
   list-style: none; }

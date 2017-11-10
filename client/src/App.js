@@ -81,7 +81,7 @@ class App extends Component {
   render() {
     const { currentUser } = this.state
     return (
-      <div className="App">
+      <div className="App content">
         <Navbar currentUser={currentUser} />
         <Switch>
           <Route exact path="/" component={Home} />
