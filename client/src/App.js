@@ -11,6 +11,7 @@ import Order from './views/Order'
 import CurrentOrder from './views/CurrentOrder'
 import OrderConfirmation from './views/OrderConfirmation'
 import ProductIndex from './views/ProductIndex'
+import ProductNew from './views/ProductNew'
 import ProductEdit from './views/ProductEdit'
 import LogIn from './views/LogIn'
 import LogOut from './views/LogOut'
@@ -104,9 +105,16 @@ class App extends Component {
             ? <Order />
             : <Redirect to="/" />
           }} />
-          <Route path="/products" render={(props) => {
+
+          <Route exact path="/products" render={(props) => {
             return currentUser
-            ? <ProductIndex />
+            ? <ProductIndex {...props} />
+            : <Redirect to="/" />
+          }} />
+
+          <Route exact path="/products/new" render={(props) => {
+            return currentUser
+            ? <ProductNew {...props} />
             : <Redirect to="/" />
           }} />
 

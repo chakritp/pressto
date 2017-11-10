@@ -34,7 +34,7 @@ class OrderConfirmation extends React.Component {
               <hr/>
               <h2>Order Details</h2>
               {this.state.order.items.map(item => {
-                return <div key={item._id}>{item.quantity} {item.product.name}</div>
+                return item.product ? <div key={item._id}>{item.quantity} {item.product.name}</div> : null
               })}
             </div>
           )

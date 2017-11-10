@@ -94,6 +94,9 @@ class Cart extends React.Component {
   }
 
   onQuantityChange(evt, id) {
+    // prevent user from inputting quantity less than 1
+    if(evt.target.value <= 0) return (evt.target.value = 1)
+
     //set value of cart in localStorage
     var itemsArray = JSON.parse(localStorage.getItem('itemsArray')) || []
     for (var index in itemsArray) {
