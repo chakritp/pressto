@@ -67,6 +67,7 @@ class App extends Component {
 
   logout() {
     clientAuth.logOut()
+    this.showSuccess("Successfully logged out")
     this.setState({currentUser: null})
   }
   
