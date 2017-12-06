@@ -27,7 +27,9 @@
     width: 100%;
     z-index: 99999; }
   .App img {
-    margin-left: 10px; } }
+    margin-left: 10px; }
+  .App .columns {
+    margin: 0; } }
 
 .NavBar ul, .NavBar li {
   list-style: none; }
@@ -60,7 +62,8 @@
       .Home .banner .heading h2 {
         font-size: 2.1em !important; }
   .Home .card {
-    margin-top: 20px; }
+    margin-top: 20px;
+    min-height: 100%; }
     .Home .card p.title {
       text-align: center; }
     .Home .card .fa-stack-2x {
