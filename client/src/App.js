@@ -131,7 +131,7 @@ class App extends Component {
           }} />
           <Route path="/login" render={(props) => {
             return !currentUser
-            ? <LogIn {...props} onLoginSuccess={this.onLoginSuccess.bind(this)} />
+            ? <LogIn {...props} showSuccess={this.showSuccess.bind(this)} showError={this.showError.bind(this)} onLoginSuccess={this.onLoginSuccess.bind(this)} />
             : <Redirect to="/order-history" />
           }} />
 
@@ -161,7 +161,7 @@ class App extends Component {
               : <Redirect to="/" />
           }} />
           <Route path="/logout" render={(props) => {
-            return <LogOut onLogOut={this.logout.bind(this)} />
+            return <LogOut showSuccess={this.showSuccess.bind(this)} onLogOut={this.logout.bind(this)} />
           }} />
         </Switch>
         <Footer />

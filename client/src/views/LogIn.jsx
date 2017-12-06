@@ -22,7 +22,11 @@ class LogIn extends React.Component {
       this.setState({ fields: { email: '', password: '' } })
       if(user) {
         this.props.onLoginSuccess(user)
+        this.props.showSuccess("Login Successful")
         this.props.history.push('/order-history')
+      }
+      else {
+        this.props.showError("Incorrect credentials")
       }
     })
   }
