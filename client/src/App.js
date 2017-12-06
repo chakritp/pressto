@@ -123,7 +123,7 @@ class App extends Component {
             return <Menu {...props} onUpdateCart={this.updateCart.bind(this)}/>
           }} />
           <Route path="/cart" render={(props) => {
-            return <Cart {...props} showError={this.showError.bind(this)}/>
+            return <Cart {...props} showSuccess={this.showSuccess.bind(this)} showError={this.showError.bind(this)}/>
           }} />
           <Route path="/order-confirmation/:id" component={OrderConfirmation} />
           <Route path="/current-orders" render={(props) => {

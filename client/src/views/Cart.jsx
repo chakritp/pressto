@@ -165,6 +165,7 @@ class Cart extends React.Component {
               {!this.state.name || !this.state.telephone
               ? <span>Please fill in your name and telephone number to complete this order</span>
               : <Checkout
+                  {...this.props}
                   shoppingCart={this.state.shoppingCart}
                   amount={this.state.total}
                   description={this.state.description}

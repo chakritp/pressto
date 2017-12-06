@@ -16,31 +16,39 @@ class Checkout extends React.Component {
       data: data
     }).then(res => {
       console.log(res)
-      var shoppingCart = this.props.shoppingCart
-      var orderData = {
-        stripeId: res.data.charge.id,
-        customer: {
-          name: this.props.customerName,
-          telephone: this.props.telephone
-        },
-        items: this.props.shoppingCart.map((cartItem) => { return { product: cartItem.item._id, quantity: cartItem.quantity } }), //map item quantity and id here
-      }
-      
-      // create order from shopping cart
-      axios({
-        url: '/api/orders',
-        method: 'POST',
-        data: orderData
-      }).then(res => {
-        // order saved to mongo
-        console.log(res)
-
-        //clear shopping cart from local storage
-        this.props.clearCart()
+      if(res.data.success){
+        var shoppingCart = this.props.shoppingCart
+        var orderData = {
+          stripeId: res.data.charge.id,
+          customer: {
+            name: this.props.customerName,
+            telephone: this.props.telephone
+          },
+          items: this.props.shoppingCart.map((cartItem) => { return { product: cartItem.item._id, quantity: cartItem.quantity } }), //map item quantity and id here
+        }
         
-        //redirect to menu page
-        this.props.history.push('/order-confirmation/' + res.data.order._id)
-      })
+        // create order from shopping cart
+        axios({
+          url: '/api/orders',
+          method: 'POST',
+          data: orderData
+        }).then(res => {
+          // order saved to mongo
+          console.log(res)
+          console.log(this)
+  
+          //clear shopping cart from local storage
+          this.props.clearCart()
+          
+          //redirect to menu page
+          this.props.showSuccess("Payment Successful")
+          this.props.history.push('/order-confirmation/' + res.data.order._id)
+        })
+      }
+      else { // error with transaction
+        console.log(res)
+        this.props.showError(res.data.error.message)
+      }
     })
   }
 
